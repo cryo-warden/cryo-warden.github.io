@@ -1,0 +1,15 @@
+- label: Home
+  permalink: /
+
+- label: Hobbies
+  permalink: /hobbies/
+
+- label: Projects
+  permalink: /projects/
+
+- label: Contact Me
+  permalink: /contact/
+
+- label: About
+  permalink: /about/
+

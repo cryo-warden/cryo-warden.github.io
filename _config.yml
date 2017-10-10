@@ -1,0 +1,27 @@
+title: cryo warden
+short_title: cryo warden
+description: cryo warden
+baseurl: ""
+url: "https://cryo-warden.github.io"
+repository: cryo-warden/cryo-warden.github.io.git
+
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name/
+  hobbies:
+    output: true
+    permalink: /:collection/:name/
+
+markdown: kramdown
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - private
+  - .vscode
+
+compress_html:
+  clippings: all
