@@ -3,12 +3,4 @@ layout: default
 title: Home
 ---
 
-{% for post in site.posts %}
-  <div class="section">
-    <h4>
-      <a href={{ post.url }}>{{ post.title }}</a>
-    </h4>
-
-    {{ post.content }}
-  </div>
-{% endfor %}
+{% include article_list.html collection = site.posts %}

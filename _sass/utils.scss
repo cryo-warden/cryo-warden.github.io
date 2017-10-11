@@ -7,8 +7,9 @@ $color-negative-off: #111;
 $color-negative-standout: #444;
 $color-negative-highlight: #222;
 
-$color-primary: #3344dd;
+$color-primary: #3344ff;
 $color-primary-light: lighten($color-primary, $color-brightness-variance);
+$color-primary-light-desaturated: desaturate($color-primary-light, $color-saturation-variance);
 $color-primary-dark: darken($color-primary, $color-brightness-variance);
 $color-primary-dark-desaturated: desaturate($color-primary-dark, $color-saturation-variance);
 

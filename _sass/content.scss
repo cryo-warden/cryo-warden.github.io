@@ -1,8 +1,19 @@
 @import 'utils';
 
-a { color: $color-primary; }
-a:visited { color: $color-primary-dark; }
-a:hover { color: $color-primary-light; }
+a {
+  @include border-radius(0.25em);
+  color: $color-primary;
+
+  &:visited { color: $color-positive; }
+  &:hover {
+    text-decoration: underline;
+    color: $color-primary-light;
+  }
+  &:active {
+    text-decoration: underline;
+    color: $color-primary-dark;
+  }
+}
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0.25em;
@@ -62,6 +73,7 @@ hr {
 }
 
 .section {
+  display: block;
   margin: 16px;
   padding: 16px;
   border: 2px solid $color-primary-dark-desaturated;
@@ -101,6 +113,18 @@ table {
       position: relative;
       left: -50%;
     }
+  }
+}
+
+.filled-parent {
+  position: relative;
+
+  .fill-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
   }
 }
 
