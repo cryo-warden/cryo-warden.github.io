@@ -6,6 +6,9 @@ url: "https://cryo-warden.github.io"
 repository: cryo-warden/cryo-warden.github.io.git
 
 collections:
+  reflections:
+    output: true
+    permalink: /:collection/:name/
   projects:
     output: true
     permalink: /:collection/:name/

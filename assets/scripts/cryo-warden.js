@@ -62,8 +62,10 @@ define([], function () {
         header.textContent = [
           'wordy crane',
           'one wry card',
-          'wary nerd co'
-        ][Math.floor(Math.random() * 3)];
+          'wary nerd co',
+          'worry dance',
+          'candy rower'
+        ][Math.floor(Math.random() * 5)];
       }
     }
   };
