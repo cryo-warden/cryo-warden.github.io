@@ -1,8 +1,5 @@
 ---
 ---
 requirejs(['cryo-warden'], function (cryoWarden) {
-  cryoWarden.initialize({
-    data: ({{ site.data | jsonify }}),
-    site: ({{ site | jsonify }})
-  });
+  cryoWarden.initialize({{ site.data | jsonify }});
 });
