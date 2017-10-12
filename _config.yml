@@ -2,7 +2,7 @@ title: cryo warden
 short_title: cryo warden
 description: cryo warden
 baseurl: ""
-url: "https://cryo-warden.github.io"
+url: "https://cryowarden.com"
 repository: cryo-warden/cryo-warden.github.io.git
 
 collections:
