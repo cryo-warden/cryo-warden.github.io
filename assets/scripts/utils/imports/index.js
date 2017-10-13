@@ -1,6 +1,7 @@
-define(['./lodash', './knockout'], function (_, ko) {
+define(['./lodash', './knockout', './seedrandom'], function (_, ko, seedrandom) {
   return {
     _: _,
-    ko: ko
+    ko: ko,
+    seedrandom: seedrandom
   };
 });
