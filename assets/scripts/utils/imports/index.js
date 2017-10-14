@@ -1,7 +1,10 @@
-define(['./lodash', './knockout', './seedrandom'], function (_, ko, seedrandom) {
+define([
+  './lodash', './knockout', './seedrandom', 'jquery'
+], function (_, ko, seedrandom, jQuery) {
   return {
     _: _,
     ko: ko,
-    seedrandom: seedrandom
+    seedrandom: seedrandom,
+    jQuery: jQuery
   };
 });
