@@ -1,0 +1,20 @@
+---
+title: "Text Adventure"
+layout: default
+order: 1
+mainScript: "/assets/scripts/games/text-adventure/main.js"
+styleUrls:
+  - "/assets/css/text-adventure-style"
+---
+
+<p class="esnext-warning">This page uses recent additions to the JavaScript language. If you do not use a modern browser, the code on this page will not work.</p>
+
+<div class="text-adventure">
+  <div class="event panel"></div>
+
+  <div class="map panel" data-bind="foreach: rooms">
+    <div data-bind="foreach: $data">
+      <span data-bind="text: typeIcon"></span>
+    </div>
+  </div>
+</div>

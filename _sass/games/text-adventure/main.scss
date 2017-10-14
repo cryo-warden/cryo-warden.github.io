@@ -1,0 +1,33 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  flex: auto 1 1;
+  margin: 0px 32px;
+  height: auto!important;
+  width: auto!important;
+}
+
+.text-adventure {
+  display: flex;
+  margin: 8px;
+  padding: 8px;
+  flex: 1 1 auto;
+
+  font-family: Courier New, Courier, monospace;
+
+  .panel {
+    margin: 8px;
+    padding: 8px;
+    flex: 1 1 0;
+    border: silver 3px outset;
+  }
+
+  .map {
+    flex: 0 1 auto;
+  }
+}
