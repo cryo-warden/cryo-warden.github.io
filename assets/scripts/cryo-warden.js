@@ -18,8 +18,8 @@ define(['utils/index'], function (utils) {
       if (Math.random() < 1/7 && document.querySelector) {
         var header = document.querySelector('#header');
         if (!header) { return; }
-    
-        header.textContent = [
+
+        var anagrams = [
           'wordy crane',
           'one wry card',
           'wary nerd co',
@@ -27,7 +27,9 @@ define(['utils/index'], function (utils) {
           'awry nerd co',
           'worry dance',
           'candy rower'
-        ][Math.floor(Math.random() * 7)];
+        ];
+
+        header.textContent = anagrams[Math.floor(Math.random() * anagrams.length)];
       }
     }
   };

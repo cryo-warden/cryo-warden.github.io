@@ -1,0 +1,11 @@
+{% assign page = include.page %}
+<div class="section filled-parent">
+  <h4>
+      <a href="{{ site.baseurl }}{{ page.url }}">
+        {{ page.title }}
+        <span class="fill-parent"></span>
+      </a>
+  </h4>
+
+  {{ page.excerpt }}
+</div>

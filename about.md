@@ -6,7 +6,7 @@ title: About
 
 Welcome to the standard About page.
 
-The following questions focus on this website. The site as a whole is meant to convey anything that would go on an About Me page.
+The following questions focus on this website. If you wanted to see anything that would go on an About Me page, the rest of the site is meant to do that.
 
 ----
 
@@ -51,7 +51,7 @@ Capital letters have their place in decoration, but I personally embrace the aes
 
 #### Are there any photos of you on here?
 
-No.
+There are not.
 
 #### Why not?
 
@@ -72,5 +72,6 @@ It is typical to define a person as their entire body: face and build and brain 
 I prefer to define my "self" as a specific set of memories and patterns of thought. (In fairness, I cannot truly define this set, but if I did have a complete definition for "self", I believe it would take that form.)
 
 And for now, let's mention but not explore two relevant tangents:
+
 * Memories and patterns of thought *do* change over time, so this definition of identity would make you a different person pretty much all the time. (This is easy to fix.)
 * Defining the mind-body interface is vague at best. (This is not easy to fix, but theoretically tractable.)
