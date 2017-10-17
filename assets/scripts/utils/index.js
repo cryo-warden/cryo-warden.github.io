@@ -1,11 +1,14 @@
-define(['./imports/index', './math', './strings'], function (imports, math, strings) {
+define([
+  './imports/index', './math', './strings', './functions'
+], function (imports, math, strings, functions) {
   return {
     _: imports._,
     ko: imports.ko,
-    seedRandom: imports.seedRandom,
+    seedrandom: imports.seedrandom,
     jQuery: imports.jQuery,
 
     math: math,
-    strings: strings
+    strings: strings,
+    functions: functions
   };
 });
