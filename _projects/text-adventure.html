@@ -12,9 +12,22 @@ styleUrls:
 <div class="text-adventure">
   <div class="event panel"></div>
 
-  <div class="map panel" data-bind="foreach: rooms">
-    <div data-bind="foreach: $data">
-      <span data-bind="text: typeIcon"></span>
+  <div class="column">
+    <div class="row no-growth">
+      <div class="map panel">
+        <div data-bind="html: map"></div>
+      </div>
+
+      <div class="room panel" data-bind="with: currentRoom">
+          <div>Value: <span data-bind="text: value()"></span></div>
+          <div>Fertility: <span data-bind="text: fertility()"></span></div>
+          <div>Elevation: <span data-bind="text: elevation()"></span></div>
+          <div>Temperature: <span data-bind="text: temperature()"></span></div>
+          <div>Humidity: <span data-bind="text: humidity()"></span></div>
+          <div>Type: <span data-bind="text: type()"></span></div>
+        </div>
+      </div>
+    
+      <div class="action panel"></div>
     </div>
-  </div>
 </div>

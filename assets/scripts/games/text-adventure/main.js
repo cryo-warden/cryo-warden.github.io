@@ -1,7 +1,9 @@
-requirejs(['utils/index'], (utils) => {
+requirejs([
+  'utils', 'games/text-adventure/game/index'
+], (utils, gameIndex) => {
   requirejs(['main']);
 
-  const { _, ko, math, jQuery } = utils;
+  const { _, ko, jQuery } = utils;
 
   const esnextWarnings = document.querySelectorAll('.esnext-warning');
   esnextWarnings.forEach(warning => {
@@ -13,85 +15,59 @@ requirejs(['utils/index'], (utils) => {
     // TODO insert in order of effect
   };
 
-  const getElevation = (x, y) => {
-    return math.getNoiseField(x, y, 'elevation');
-  };
+  const world = gameIndex.worldIndex.createWorld('');
+  const getRoom = world.roomSource.getRoom;
 
-  const getTemperature = (x, y, elevation) => {
-    return math.getNoiseField(x, y, 'temperature') * (1 - elevation);
-  };
+  const xPosition = ko.observable(0);
+  const yPosition = ko.observable(0);
+  const currentRoom = ko.pureComputed(() => {
+    return world.roomSource.getRoomModel(xPosition(), yPosition());
+  });
 
-  const getHumidity = (x, y, elevation) => {
-    return math.getNoiseField(x, y, 'humidity') * (1 - elevation);
-  };
-
-  const getRoomType = (e, t, h) => {
-    return e < 0.25 ? 'trench' : e < 0.5 ? 'water' : e < 0.75 ? 'land' : 'hill';
-  };
-
-  const typeIconMap = {
-    'trench': 't',
-    'water': '~',
-    'land': '.',
-    'hill': 'h'
-  };
-
-  const generateRoom = (x, y) => {
-    const elevation = getElevation(x, y);
-    const temperature = getTemperature(x, y, elevation);
-    const humidity = getHumidity(x, y, elevation);
-    const type = getRoomType(elevation, temperature, humidity);
-    const typeIcon = typeIconMap[type];
-
-    // TODO generate additional room features
-
-    return {
-      elevation,
-      temperature,
-      humidity,
-      type,
-      typeIcon
-    };
-  };
-
-  const savedRooms = {};
-  const getRoom = (x, y) => {
-    // TODO load from long-saved data
-    const roomIndex = x + ',' + y;
-    const savedRoom = savedRooms[roomIndex];
-    if (savedRoom) {
-      return savedRoom;
-    }
-
-    return (
-      savedRooms[roomIndex] = generateRoom(x, y)
-    );
-  };
-
-  const xPosition = ko.observable(20);
-  const yPosition = ko.observable(20);
-  const rooms = ko.pureComputed(() => {
+  const mapRange = 8;
+  const map = ko.pureComputed(() => {
     const x = xPosition();
     const y = yPosition();
-    return _.map(_.range(y - 3, y + 4), i => {
-      return _.map(_.range(x - 3, x + 4), j => {
-        return getRoom(j, i);
-      });
-    });
+    const minX = x - mapRange;
+    const maxX = x + 1 + mapRange;
+    const minY = y - mapRange;
+    const maxY = y + 1 + mapRange;
+    var htmlMap = '';
+
+    for (var j = minY; j < maxY; ++j) {
+      for (var i = minX; i < maxX; ++i) {
+        if (i === x && j === y) {
+          htmlMap += 'o';
+        } else {
+          htmlMap += world.roomSource.getRoomModel(i, j).typeIcon();
+        }
+      }
+
+      htmlMap += '<br />';
+    }
+
+    return htmlMap;
   });
 
   const isPassable = room => {
-    if (room.type === 'water' || room.type === 'trench') {
+    const type = room.type();
+    if (type === 'water' || type === 'trench') {
       return false;
     }
 
     return true;
   };
 
+  var lastMoveTime = 0;
+  const moveDelay = 100;
   const move = (deltaX, deltaY) => {
+    const now = Date.now();
+    if (lastMoveTime + moveDelay > now) { return; }
+    lastMoveTime = now;
+
     const destinationX = xPosition() + deltaX;
     const destinationY = yPosition() + deltaY;
-    const destinationRoom = getRoom(destinationX, destinationY);
+    const destinationRoom = world.roomSource.getRoomModel(destinationX, destinationY);
 
     if (isPassable(destinationRoom)) {
       xPosition(destinationX);
@@ -113,10 +89,10 @@ requirejs(['utils/index'], (utils) => {
     }
   });
   
-  // TODO move room-generation code elsewhere
   setTimeout(() => {
     ko.applyBindings({
-      rooms
+      currentRoom,
+      map
     }, document.querySelector('body'));
-  }, 500);
+  }, 100);
 });

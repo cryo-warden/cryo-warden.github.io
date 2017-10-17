@@ -11,7 +11,7 @@ define(['./imports/index'], function (imports) {
 
   var getRandom = function (x, y, entropy) {
       var rng = new seedrandom(x + '|' + y + '|' + entropy);
-      return rng.double();
+      return rng.quick();
   };
 
   var getSingleNoise = function (x, y, entropy) {

@@ -27,7 +27,25 @@ body {
     border: silver 3px outset;
   }
 
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0;
+  }
+
+  .no-growth {
+    flex-grow: 0;
+    flex-basis: auto;
+  }
+
   .map {
+    padding: 0px;
     flex: 0 1 auto;
   }
 }
