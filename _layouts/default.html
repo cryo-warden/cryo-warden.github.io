@@ -31,14 +31,14 @@ layout: compress
         <div class="outer">
           <div class="inner">
             {% for item in site.data.nav_items %}
-              <a href="{{ site.baseurl }}{{ item.permalink }}">{{ item.label }}</a>
+              <a href="{{ item.permalink | relative_url }}">{{ item.label }}</a>
             {% endfor %}
           </div>
         </div>
       </div>
     </div>
 
-    <a id="header" href="{{ site.baseurl }}/">{{ site.title }}</a>
+    <a id="header" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     
     <div id="main">
       {% if page.title %}
@@ -66,12 +66,12 @@ layout: compress
 
     <script type="text/javascript">
         var require = {
-          baseUrl: "/assets/scripts/",
+          baseUrl: "{{ '/assets/scripts/' | relative_url }}",
           paths: {
-            'jquery': '/assets/scripts/utils/imports/jquery'
+            "jquery": "{{ '/assets/scripts/utils/imports/jquery' | relative_url }}"
           }
         };
     </script>
-    <script type="text/javascript" data-main="{{ page.mainScript }}" src="/assets/scripts/utils/imports/require.js"></script>
+    <script type="text/javascript" data-main="{{ page.mainScript | relative_url }}" src="{{ '/assets/scripts/utils/imports/require.js' | relative_url }}"></script>
   </body>
 </html>
