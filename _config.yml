@@ -17,7 +17,7 @@ collections:
     permalink: /:collection/:name/
 
 markdown: kramdown
-gems:
+plugins:
   - jekyll-feed
 exclude:
   - Gemfile
