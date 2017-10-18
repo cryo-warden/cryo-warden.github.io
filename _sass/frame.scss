@@ -8,6 +8,7 @@
 
 html {
   background-color: $color-negative-off;
+  background-image: url($imageurl + '/frame/tile.png');
   color: $color-positive;
   font-family: $font-primary;
 }
@@ -16,6 +17,7 @@ html {
   margin: 0px;
   padding: 0px;
   background-color: $color-negative;
+  background-image: url($imageurl + '/frame/tile-subtle.png');
   font-family: $font-decorative;
 
   a {
@@ -72,14 +74,15 @@ html {
   background-color: $color-negative;
 
   #main-header {
+    font-family: $font-secondary;
+    font-size: 200%;
     text-align: center;
-    
-    span {
-      font-family: $font-secondary;
-      
-      padding: 0.2em 1em;
+
+    div {
+      display: inline-block;
+      padding: 16px 64px;
+
       background-color: $color-negative-off;
-      font-size: 200%;
       @include border-radius(0px 0px 8px 8px);
     }
   }

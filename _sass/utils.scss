@@ -25,7 +25,8 @@ $color-secondary-dark-desaturated: desaturate($color-secondary-dark, $color-satu
   border-radius: $radius;
 }
 
-$font-primary: Arial, Helvetica, sans-serif;
-$font-secondary: 'Times New Roman', Times, serif;
-$font-decorative: Courier New, Courier, monospace;
+$font-primary: 'Times New Roman', Times, serif;
+$font-secondary: Arial, Helvetica, sans-serif;
+$font-decorative: 'Courier New', Courier, monospace;
 
+$imageurl: $baseurl + '/assets/images';
