@@ -17,7 +17,13 @@
     @include border-radius(8px);
   }
 
-  #main { width: 95%; }
+  #main {
+    width: 95%;
+
+    #main-header div {
+      padding: 8px 16px;
+    }
+  }
 
   .section {
     margin: 4px;
