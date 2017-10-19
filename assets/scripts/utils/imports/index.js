@@ -1,10 +1,7 @@
 define([
-  './lodash', './knockout', './seedrandom', 'jquery'
-], function (_, ko, seedrandom, jQuery) {
+  './lodash'
+], function (_) {
   return {
-    _: _,
-    ko: ko,
-    seedrandom: seedrandom,
-    jQuery: jQuery
+    _: _
   };
 });

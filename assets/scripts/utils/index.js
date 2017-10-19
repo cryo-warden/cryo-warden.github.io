@@ -1,14 +1,9 @@
 define([
-  './imports/index', './math', './strings', './functions'
-], function (imports, math, strings, functions) {
+  './imports/index', './strings'
+], function (imports, strings) {
   return {
     _: imports._,
-    ko: imports.ko,
-    seedrandom: imports.seedrandom,
-    jQuery: imports.jQuery,
 
-    math: math,
-    strings: strings,
-    functions: functions
+    strings: strings
   };
 });
