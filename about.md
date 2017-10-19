@@ -37,7 +37,9 @@ In addition, I'm gathering information that should make this site easier on the 
 
 ----
 
-#### What's the point of working so hard on this site? Won't it be useless when you're done job-hunting?
+#### What's the point of working so hard on this site?
+
+##### *(Won't it be useless when you're done job-hunting?)*
 
 It should still have sufficient value. If I use it correctly, this site would be a great way for all kinds of people to get to know me.
 

@@ -55,29 +55,67 @@ Any secrets kept from you will be harmless and will simply not matter to you any
 
 Usually, I learn fast. And this includes rapid acknowledgement of areas where my knowledge needs work. And when I learn something, I learn it deeply. As far as I'm concerned, learning is *not* about memorization, but instead it's about building intuition about interfaces.
 
-(And when I say "interfaces", yes, that does include interfaces in your program architecture. But it *also* includes interfaces between different people, colloquially referred to as "relationships". It is a general term describing any relationship between two concepts.)
+And when I say "interfaces", yes, that does include interfaces in your program architecture. But it *also* includes interfaces between different people, colloquially referred to as "relationships". It is a general term describing any relationship between two concepts.
 
 If you memorize the name of every element on the periodic table, you haven't learned chemistry. You've learned a party trick.
 
-Memorization is useful, of course, but after you memorize several thousand words, well... you can just write things down or look them up again. And if there's a fact you need to know ten times a day, you'll memorize it soon enough whether you want to or not.
+Memorization is useful, of course, but after you memorize several thousand words, well... you can just write things down and look them up again. And if there's a fact you need to know ten times a day, you'll memorize it soon enough whether you want to or not.
 
 ----
 
-#### Weakness #3: Weird.
+#### Weakness #3: Weirdness.
 
-While I would normally call my weirdness a strength (and in the past I have thanked anyone for calling me such), I recognize that most other people will view my weirdness as a flaw. Fair enough.
+While I would normally call my weirdness a strength (and in the past I have thanked anyone for calling me weird), I recognize that most other people will view my weirdness as a flaw. Fair enough.
 
 If a conversation does not have a clear goal or pertain to one of my favorite topics, then I will be unlikely to contribute anything more than an occasional silly joke. (My favorite conversation topics are programming, science, artificial intelligence, psychology, games, martial arts, and fiction relevant to these topics.)
 
 ----
 
-Calm and kind.
+#### Strength #4: Calm and kind.
 
-Not easily intimidated, even when I should be. I could have a casual conversation with a celebrity.
+Situations which involve me are unlikely to spiral out of control. Rather, my presence should increase the likelihood of a serene atmosphere.
 
-Not subservient. My actions require a specific known purpose. Demands for blind obedience will harm my motivation. There's an easy workaround for this. Simply request obedience now and a promise an explanation later. My nature drives me to act as a partner to anyone whose goals align with my own. If I have reason to trust your judgment, then I will.
+----
 
-Happy to take the lead. When I understand a group's goals and those goals align with my own, then I naturally take initiative. If the [bystander effect](https://en.wikipedia.org/wiki/Bystander_effect) paralyzes a group, I will detect this and resolve the situation.
+#### Weakness #4: Excessive aversion to bothering others.
+
+It takes conscious effort for me to directly tell another person when I need help.
+
+I fail to take my own desires seriously. Fortunately, as long as I have other people to help, then making myself act boldly becomes trivially easy.
+
+----
+
+#### Strength #X: Never gets offended.
+
+What normally offends a person?
+
+Insults? Contradiction?
+
+Insults bore me. And insult is nothing more than an attempt to lower a person's status. Simple and trite. Status games are not the most fun kinds of games. In fact, they drain the fun out of everything else. Status games are anti-fun. So, either I will not react to an insult at all, or I will start talking about status games and meta-analyzing the conversational context that produced the insult. Thus, anyone who tries to insult me will find themselves subjected to a peaceful examination of their motives.
+
+On the other hand, if you contradict me, we will have a civil debate, and I will enjoy it.
+
+In fact, if you convince me that I've made a mistake, you will impress me, and I will probably enjoy your company.
+
+----
+
+#### Strength #X: Not easily intimidated, even when I should be.
+
+I could have a casual conversation with a celebrity.
+
+----
+
+#### Weakness #X: Not subservient.
+
+Much like my weirdness, I consider this a positive trait, but others may be correct not to view it as such. This is a matter of goal alignment.
+
+My actions require a specific known purpose. Demands for blind obedience will harm my motivation. There's an easy workaround for this. Simply request obedience now and a promise an explanation later. My nature drives me to act as a partner to anyone whose goals align with my own. If I have reason to trust your judgment, then I will.
+
+----
+
+#### Strength #X: Happy to take the lead.
+
+When I understand a group's goals and those goals align with my own, then I naturally take initiative. If the [bystander effect](https://en.wikipedia.org/wiki/Bystander_effect) paralyzes a group, I will detect this and resolve the situation.
 
 ----
 
@@ -97,23 +135,11 @@ When we're designing a feature,
 
 ----
 
-#### Strength #X: Never gets offended.
-
-What normally offends a person?
-
-Insults? Contradiction?
-
-Insults bore me. Status games are not the most fun kinds of games. In fact, they drain the fun out of everything else. Status games are anti-fun. Either I will not react to an insult at all, or I will start talking about status games and meta-analyzing the conversational context that produced the insult.
-
-On the other hand, if you contradict me, we will have a civil debate, and I will enjoy it.
-
-In fact, if you convince me that I've make a mistake, you will impress me, and I will probably enjoy your company.
-
-----
-
 #### Weakness #X: Goes off on tangents.
 
-This is similar to my penchant for going into excessive detail. However, in this case, I notice more than one thing at a time. Oftentimes, several of the things I notice will be important or fascinating. At that point, there will be multiple directions the conversation needs to go, and I shall simply have to pick one.
+This is similar to my penchant for going into excessive detail. However, in this case, I notice more than one thing at a time. Oftentimes, several of the things I notice will be important or fascinating. At that point, there will be multiple directions the conversation needs to go, and I shall simply have to pick one. Oftentimes the direction I choose is not what others would have chosen, since the most vital topic to cover is the one least likely to occur to others independently. Couple this fact with the fact that I sometimes omit the logical steps that led to the new topic, and others will observe a tangent that is not obviously relevant to the current conversation.
+
+If the conversation were an email or a webpage instead, I could simply start a new thread and potentially include a hyperlink without affecting the main flow of conversation.
 
 ----
 
@@ -137,7 +163,7 @@ If the colors on this website look wrong to you, this is why.
 
 ----
 
-#### Strength #X: Competitive.
+#### Strength #X: Competitive drive.
 
 It is trivial to motivate me if even one of my coworkers has skills of the same type as mine. If they are less skilled than I am, I will work to raise them to my level. If they are more skilled than I am, I will push myself to close the gap.
 
