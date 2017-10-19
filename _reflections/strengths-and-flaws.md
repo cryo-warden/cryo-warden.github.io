@@ -51,27 +51,69 @@ Any secrets kept from you will be harmless and will simply not matter to you any
 
 ----
 
-Strong intuition.
+#### Strength #3: Strong intuition.
 
-Weird.
+Usually, I learn fast. And this includes rapid acknowledgement of areas where my knowledge needs work. And when I learn something, I learn it deeply. As far as I'm concerned, learning is *not* about memorization, but instead it's about building intuition about interfaces.
+
+(And when I say "interfaces", yes, that does include interfaces in your program architecture. But it *also* includes interfaces between different people, colloquially referred to as "relationships". It is a general term describing any relationship between two concepts.)
+
+If you memorize the name of every element on the periodic table, you haven't learned chemistry. You've learned a party trick.
+
+Memorization is useful, of course, but after you memorize several thousand words, well... you can just write things down or look them up again. And if there's a fact you need to know ten times a day, you'll memorize it soon enough whether you want to or not.
+
+----
+
+#### Weakness #3: Weird.
+
+While I would normally call my weirdness a strength (and in the past I have thanked anyone for calling me such), I recognize that most other people will view my weirdness as a flaw. Fair enough.
+
+If a conversation does not have a clear goal or pertain to one of my favorite topics, then I will be unlikely to contribute anything more than an occasional silly joke. (My favorite conversation topics are programming, science, artificial intelligence, psychology, games, martial arts, and fiction relevant to these topics.)
+
+----
 
 Calm and kind.
-
-Competitive.
 
 Not easily intimidated, even when I should be. I could have a casual conversation with a celebrity.
 
 Not subservient. My actions require a specific known purpose. Demands for blind obedience will harm my motivation. There's an easy workaround for this. Simply request obedience now and a promise an explanation later. My nature drives me to act as a partner to anyone whose goals align with my own. If I have reason to trust your judgment, then I will.
 
-Happy to take the lead. When I understand a group's goals and those goals align with my own, then I naturally take initiative when someone needs to. I consciously override the [bystander effect](https://en.wikipedia.org/wiki/Bystander_effect).
+Happy to take the lead. When I understand a group's goals and those goals align with my own, then I naturally take initiative. If the [bystander effect](https://en.wikipedia.org/wiki/Bystander_effect) paralyzes a group, I will detect this and resolve the situation.
 
-Capable of abnormal specificity.
+----
 
-Sometimes goes into too much detail.
+#### Strength #X: Capable of abnormal specificity.
 
-Never gets offended.
+Ambiguous communication is obvious to me. While I will accidentally say or write something ambiguous from time to time, I am highly likely to notice this quickly. Whenever specificity is required, I'll correct the ambiguity immediately.
 
-Goes off on tangents. (The tangents are usually interesting.)
+In my previous work, I would regularly predict bugs at the design stage, mid-conversation, during design meetings. This is the level of detail at which I think about my work.
+
+----
+
+#### Weakness #X: Sometimes goes into too much detail.
+
+During scrum meetings, I need to fight my natural impulses, otherwise everyone in the group will learn the exact cause of every interesting bug I've fixed.
+
+When we're designing a feature, 
+
+----
+
+#### Strength #X: Never gets offended.
+
+What normally offends a person?
+
+Insults? Contradiction?
+
+Insults bore me. Status games are not the most fun kinds of games. In fact, they drain the fun out of everything else. Status games are anti-fun. Either I will not react to an insult at all, or I will start talking about status games and meta-analyzing the conversational context that produced the insult.
+
+On the other hand, if you contradict me, we will have a civil debate, and I will enjoy it.
+
+In fact, if you convince me that I've make a mistake, you will impress me, and I will probably enjoy your company.
+
+----
+
+#### Weakness #X: Goes off on tangents.
+
+This is similar to my penchant for going into excessive detail. However, in this case, I notice more than one thing at a time. Oftentimes, several of the things I notice will be important or fascinating. At that point, there will be multiple directions the conversation needs to go, and I shall simply have to pick one.
 
 ----
 
@@ -90,6 +132,14 @@ I avoid using big words because I would rather communicate than signal high stat
 #### Weakness #X: Colorblindness.
 
 I am slightly colorblind. Green and orange actually look alike to my eyes. While I feel like this shouldn't matter, it nevertheless makes itself relevant in my every creative endeavor.
+
+If the colors on this website look wrong to you, this is why.
+
+----
+
+#### Strength #X: Competitive.
+
+It is trivial to motivate me if even one of my coworkers has skills of the same type as mine. If they are less skilled than I am, I will work to raise them to my level. If they are more skilled than I am, I will push myself to close the gap.
 
 ----
 
