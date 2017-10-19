@@ -71,7 +71,7 @@ If a conversation does not have a clear goal or pertain to one of my favorite to
 
 ----
 
-#### Strength #4: Calm and kind.
+#### Strength #4: Calmness and kindness.
 
 Situations which involve me are unlikely to spiral out of control. Rather, my presence should increase the likelihood of a serene atmosphere.
 
@@ -85,13 +85,13 @@ I fail to take my own desires seriously. Fortunately, as long as I have other pe
 
 ----
 
-#### Strength #X: Never gets offended.
+#### Strength #5: Never gets offended.
 
 What normally offends a person?
 
 Insults? Contradiction?
 
-Insults bore me. And insult is nothing more than an attempt to lower a person's status. Simple and trite. Status games are not the most fun kinds of games. In fact, they drain the fun out of everything else. Status games are anti-fun. So, either I will not react to an insult at all, or I will start talking about status games and meta-analyzing the conversational context that produced the insult. Thus, anyone who tries to insult me will find themselves subjected to a peaceful examination of their motives.
+Insults bore me. A personal insult is nothing more than an attempt to lower a person's status. Simple and trite. Status games are not the most fun kinds of games. In fact, they drain the fun out of everything else. Status games are anti-fun. So, either I will not react to an insult at all, or I will start talking about status games and meta-analyzing the conversational context that produced the insult. Thus, anyone who tries to insult me might find themselves subjected to a peaceful examination of their motives.
 
 On the other hand, if you contradict me, we will have a civil debate, and I will enjoy it.
 
@@ -99,13 +99,7 @@ In fact, if you convince me that I've made a mistake, you will impress me, and I
 
 ----
 
-#### Strength #X: Not easily intimidated, even when I should be.
-
-I could have a casual conversation with a celebrity.
-
-----
-
-#### Weakness #X: Not subservient.
+#### Weakness #5: Not subservient.
 
 Much like my weirdness, I consider this a positive trait, but others may be correct not to view it as such. This is a matter of goal alignment.
 
@@ -113,13 +107,21 @@ My actions require a specific known purpose. Demands for blind obedience will ha
 
 ----
 
-#### Strength #X: Happy to take the lead.
+#### Strength #6: Happy to take the lead.
 
 When I understand a group's goals and those goals align with my own, then I naturally take initiative. If the [bystander effect](https://en.wikipedia.org/wiki/Bystander_effect) paralyzes a group, I will detect this and resolve the situation.
 
 ----
 
-#### Strength #X: Capable of abnormal specificity.
+#### Weakness #6: Excessive curiosity.
+
+Without external influence, I spend more time studying than I spend creating.
+
+Whenever I start to create something in my personal time, I tend to lose interest after I convince myself that I already have the skills to complete it. (This bothers me more than any other flaw.)
+
+----
+
+#### Strength #7: Capable of abnormal specificity.
 
 Ambiguous communication is obvious to me. While I will accidentally say or write something ambiguous from time to time, I am highly likely to notice this quickly. Whenever specificity is required, I'll correct the ambiguity immediately.
 
@@ -127,11 +129,11 @@ In my previous work, I would regularly predict bugs at the design stage, mid-con
 
 ----
 
-#### Weakness #X: Sometimes goes into too much detail.
+#### Weakness #7: Sometimes goes into too much detail.
 
 During scrum meetings, I need to fight my natural impulses, otherwise everyone in the group will learn the exact cause of every interesting bug I've fixed.
 
-When we're designing a feature, 
+When we were designing a feature, I would sometimes propose or inquire after details about the feature which the team would have preferred to leave alone until later in development.
 
 ----
 
@@ -140,12 +142,6 @@ When we're designing a feature,
 This is similar to my penchant for going into excessive detail. However, in this case, I notice more than one thing at a time. Oftentimes, several of the things I notice will be important or fascinating. At that point, there will be multiple directions the conversation needs to go, and I shall simply have to pick one. Oftentimes the direction I choose is not what others would have chosen, since the most vital topic to cover is the one least likely to occur to others independently. Couple this fact with the fact that I sometimes omit the logical steps that led to the new topic, and others will observe a tangent that is not obviously relevant to the current conversation.
 
 If the conversation were an email or a webpage instead, I could simply start a new thread and potentially include a hyperlink without affecting the main flow of conversation.
-
-----
-
-#### Weakness #X: Excessive curiosity.
-
-Without external influence, I spend more time studying than I spend creating.
 
 ----
 
