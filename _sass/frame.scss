@@ -72,7 +72,8 @@ html {
   overflow: auto; // prevent margin collapsing
   @include border-radius(0px 0px 16px 16px);
   background-color: $color-negative;
-
+  background-image: url($imageurl + '/frame/tile-hex-frame.png');
+  
   #main-header {
     font-family: $font-secondary;
     font-size: 200%;
