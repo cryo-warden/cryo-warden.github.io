@@ -29,6 +29,8 @@ The editor used is Visual Studio Code. This lightweight editor is wonderful. I d
 
 The HTML output is compressed using [jekyll-compress-html](https://github.com/penibelst/jekyll-compress-html).
 
+I created the background images with [Inkscape](https://inkscape.org/).
+
 In addition, I'm gathering information that should make this site easier on the eyes.
 
 * [The Optimal Text Layout is More Than Line Length](https://www.paulolyslager.com/optimal-text-layout-line-length/)
