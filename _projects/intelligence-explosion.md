@@ -34,8 +34,4 @@ Efficiency is intended to be part of the gameplay.
 
 Each data node is evaluated lazily. For instance, no matter how much logic is used on the inputs to the If function, only one of those inputs will be evaluated.
 
-----
-
-More screenshots and further description will soon appear on this page.
-
 [interface-screenshot]: {{ '/assets/images/screenshots/intelligence-explosion/early-development/definition-interface.png' | relative_url }} "The function-definition interface at an early stage of development"
