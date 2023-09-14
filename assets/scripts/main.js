@@ -13,7 +13,7 @@ define(['utils/index', 'site-data'], function (utils, siteData) {
     }
   }
 
-  if (Math.random() < 1/7 && document.querySelector) {
+  if (Math.random() < 1 / 3 && document.querySelector) {
     var header = document.querySelector('#header');
     if (!header) { return; }
 
@@ -24,7 +24,10 @@ define(['utils/index', 'site-data'], function (utils, siteData) {
       'a wry nerd co',
       'awry nerd co',
       'worry dance',
-      'candy rower'
+      'candy rower',
+      'dry cane row',
+      'rye orc dawn',
+      'crown deary',
     ];
 
     header.textContent = anagrams[Math.floor(Math.random() * anagrams.length)];
