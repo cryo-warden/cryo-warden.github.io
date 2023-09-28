@@ -1,4 +1,0 @@
-{% assign sortedPages = include.pages | sort: 'order' %}
-{% for page in sortedPages %}
-  {% include page_summary.html page=page %}
-{% endfor %}
