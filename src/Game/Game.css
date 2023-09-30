@@ -1,0 +1,38 @@
+.Game {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #111;
+  grid-template-areas:
+    "log  focus"
+    "self others";
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 70% 30%;
+}
+
+.Game .log {
+  grid-area: log;
+}
+
+.Game .focus {
+  grid-area: focus;
+}
+
+.Game .self {
+  grid-area: self;
+}
+
+.Game .others {
+  grid-area: others;
+}
+
+.Game .log,
+.Game .focus,
+.Game .self,
+.Game .others {
+  margin: 4px;
+  border-radius: 8px;
+  background-color: #000;
+}
