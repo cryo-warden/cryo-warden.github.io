@@ -1,11 +1,11 @@
-import './Game.css';
-import Log from './Log/Log';
-import Focus from './Focus/Focus';
-import Self from './Self/Self';
-import Others from './Others/Others';
-import { useMemo } from 'react';
-import { createEngine } from 'GameEngine/Engine';
-import { GameEngineContext } from './GameEngineContext';
+import "./Game.css";
+import Log from "./Log/Log";
+import Focus from "./Focus/Focus";
+import Self from "./Self/Self";
+import Others from "./Others/Others";
+import { useMemo } from "react";
+import { createEngine } from "GameEngine/Engine";
+import { GameEngineContext } from "./GameEngineContext";
 
 const Game = () => {
   const engine = useMemo(() => createEngine(), []);
@@ -26,7 +26,7 @@ const Game = () => {
           <Others />
         </div>
       </div>
-    </GameEngineContext.Provider >
+    </GameEngineContext.Provider>
   );
 };
 

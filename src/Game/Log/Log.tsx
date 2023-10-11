@@ -13,11 +13,7 @@ const Log = () => {
     return subscription.cancel;
   }, [engine, setMessages]);
 
-  return (
-    <pre>
-      {JSON.stringify(messages, null, 2)}
-    </pre>
-  );
+  return <pre>{JSON.stringify(messages, null, 2)}</pre>;
 };
 
 export default Log;

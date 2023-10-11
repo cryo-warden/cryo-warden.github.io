@@ -14,7 +14,8 @@ const scale = (a: Vector, b: number) => create(a.x * b, a.y * b);
 const inverseScale = (a: Vector, b: number) => create(a.x / b, a.y / b);
 
 /** For rotations, multiply vectors as imaginary numbers. */
-const multiply = (a: Vector, b: Vector) => create(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
+const multiply = (a: Vector, b: Vector) =>
+  create(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
 
 const magnitude = (a: Vector) => Math.hypot(a.x, a.y);
 
@@ -30,4 +31,4 @@ export const Vector = {
   multiply,
   magnitude,
   unit,
-}
+};

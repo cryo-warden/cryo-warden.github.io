@@ -6,8 +6,8 @@ const Button = ({
   children,
   onClick,
 }: {
-  children: ReactNode,
-  onClick: MouseEventHandler<HTMLButtonElement>,
+  children: ReactNode;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }) => (
   <button className="Button" onClick={onClick}>
     {children}

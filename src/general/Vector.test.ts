@@ -31,9 +31,18 @@ describe("Vector", () => {
   });
 
   it("inverse-scales Vectors", () => {
-    expect(Vector.inverseScale(a, 11)).toEqual({ x: expect.closeTo(2 / 11, 5), y: 0 });
-    expect(Vector.inverseScale(b, 13)).toEqual({ x: expect.closeTo(3 / 13, 5), y: 5 / 13 });
-    expect(Vector.inverseScale(c, 17)).toEqual({ x: 0, y: expect.closeTo(7 / 17, 5) });
+    expect(Vector.inverseScale(a, 11)).toEqual({
+      x: expect.closeTo(2 / 11, 5),
+      y: 0,
+    });
+    expect(Vector.inverseScale(b, 13)).toEqual({
+      x: expect.closeTo(3 / 13, 5),
+      y: 5 / 13,
+    });
+    expect(Vector.inverseScale(c, 17)).toEqual({
+      x: 0,
+      y: expect.closeTo(7 / 17, 5),
+    });
   });
 
   it("multiplies Vectors", () => {

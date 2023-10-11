@@ -1,18 +1,28 @@
 import { createEventSystem } from "./EventSystem";
 
-type TestEvent = {
-  type: "increment"
-} | {
-  type: "decrement";
-};
+type TestEvent =
+  | {
+      type: "increment";
+    }
+  | {
+      type: "decrement";
+    };
 
-test('stateful test of subscribe, publish, and subscription cancellation', () => {
+test("stateful test of subscribe, publish, and subscription cancellation", () => {
   const system = createEventSystem<TestEvent>();
   let i = 0;
-  const increment = () => { i += 1; };
-  const decrement = () => { i -= 1; };
-  const otherIncrement = () => { i += 1; };
-  const otherDecrement = () => { i -= 1; };
+  const increment = () => {
+    i += 1;
+  };
+  const decrement = () => {
+    i -= 1;
+  };
+  const otherIncrement = () => {
+    i += 1;
+  };
+  const otherDecrement = () => {
+    i -= 1;
+  };
 
   system.subscribe("increment", increment);
   system.subscribe("decrement", decrement);
