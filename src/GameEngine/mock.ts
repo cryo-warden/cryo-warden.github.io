@@ -61,7 +61,7 @@ export class MovementSystem extends System<
 export const mockWorld = new World();
 
 mockWorld.addSystem(new MovementSystem());
-mockWorld.addEntity(mockEntity);
+mockWorld.addEntity(null, mockEntity);
 mockWorld.update(1);
 
 mockWorld.addSystem(new EmptySystem());

@@ -1,3 +1,4 @@
+import { Component } from "./Component";
 import {
   Entity,
   EntityId,
@@ -8,21 +9,43 @@ import {
 import { ISystem } from "./System";
 
 export class World {
-  private systems: ISystem[] = [];
-  private entityInsertionQueue: Entity[] = [];
-  private entityRemovalQueue: EntityId[] = [];
-
   addSystem(system: ISystem) {
-    // Add resources (such as event pubsub and library data)
+    // WIP Add resources (such as event pubsub and library data)
     this.systems.push(system);
-    system.submitEntities(Array.from(this.worldEntityMap.values()));
+    this.worldEntityMap.forEach((worldEntity) => {
+      system.submitEntity(worldEntity);
+    });
   }
 
-  addEntity(entity: Entity): void {
-    this.entityInsertionQueue.push(entity);
+  addEntity(parentId: EntityId | null, entity: Entity): void {
+    this.entityInsertionQueue.push({ parentId, entity });
   }
   removeEntity(entityId: EntityId): void {
     this.entityRemovalQueue.push(entityId);
+  }
+  addComponent(
+    id: EntityId,
+    componentName: string,
+    component: Component
+  ): void {
+    const worldEntity = this.worldEntityMap.get(id);
+
+    if (worldEntity == null) return;
+
+    worldEntity.components[componentName] = component;
+
+    this.submitWorldEntityToSystems(worldEntity);
+  }
+  removeComponent(id: EntityId, componentName: string): void {
+    const worldEntity = this.worldEntityMap.get(id);
+
+    if (worldEntity == null) return;
+
+    this.removeWorldEntityFromSystems(worldEntity);
+
+    delete worldEntity.components[componentName];
+
+    this.submitWorldEntityToSystems(worldEntity);
   }
 
   update(deltaTime: number): void {
@@ -34,9 +57,10 @@ export class World {
     }
 
     while (this.entityInsertionQueue.length > 0) {
-      const entityToAdd = this.entityInsertionQueue.pop();
-      if (entityToAdd != null) {
-        this.addWorldEntity(entityToAdd);
+      const entityInsertion = this.entityInsertionQueue.pop();
+      if (entityInsertion != null) {
+        const { parentId, entity } = entityInsertion;
+        this.addWorldEntity(parentId, entity);
       }
     }
 
@@ -48,31 +72,50 @@ export class World {
     }
   }
 
+  private systems: ISystem[] = [];
+  private entityInsertionQueue: {
+    parentId: EntityId | null;
+    entity: Entity;
+  }[] = [];
+  private entityRemovalQueue: EntityId[] = [];
   private entityIdFactory = createEntityIdFactory();
   private worldEntityMap: Map<EntityId, WorldEntity> = new Map();
 
-  private submitWorldEntitiesToSystems(worldEntities: WorldEntity[]) {
+  private submitWorldEntityToSystems(worldEntity: WorldEntity) {
     for (let i = 0; i < this.systems.length; ++i) {
-      this.systems[i].submitEntities(worldEntities);
+      this.systems[i].submitEntity(worldEntity);
+    }
+  }
+  private removeWorldEntityFromSystems(worldEntity: WorldEntity) {
+    for (let i = 0; i < this.systems.length; ++i) {
+      this.systems[i].revokeEntity(worldEntity);
     }
   }
 
-  private addWorldEntity(entity: Entity) {
+  private addWorldEntity(parentId: EntityId | null, entity: Entity) {
+    const parent =
+      parentId == null ? null : this.worldEntityMap.get(parentId) ?? null;
+
     const worldEntities = createWorldEntities(
-      null,
+      parent,
       this.entityIdFactory,
       entity
     );
     for (let i = 0; i < worldEntities.length; ++i) {
       this.worldEntityMap.set(worldEntities[i].id, worldEntities[i]);
+      this.submitWorldEntityToSystems(worldEntities[i]);
     }
-    this.submitWorldEntitiesToSystems(worldEntities);
   }
 
   private removeWorldEntity(id: EntityId) {
     const worldEntity = this.worldEntityMap.get(id);
-    if (worldEntity == null) {
-      return;
+
+    if (worldEntity == null) return;
+
+    if (worldEntity.children != null) {
+      for (let i = 0; i < worldEntity.children.length; ++i) {
+        this.removeWorldEntity(worldEntity.children[i].id);
+      }
     }
 
     for (let i = 0; i < this.systems.length; ++i) {
@@ -80,10 +123,5 @@ export class World {
     }
 
     this.worldEntityMap.delete(id);
-
-    if (worldEntity.children == null) return;
-    for (let i = 0; i < worldEntity.children.length; ++i) {
-      this.removeWorldEntity(worldEntity.children[i].id);
-    }
   }
 }

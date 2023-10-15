@@ -70,9 +70,8 @@ export const createEventSystem = <E extends Event>(): EventSystem<E> => {
     },
     publish: (event) => {
       const eventListeners = typeSubscriptionListenerMap.get(event.type);
-      if (eventListeners == null) {
-        return;
-      }
+
+      if (eventListeners == null) return;
 
       eventListeners.forEach((listener) => {
         listener(event);

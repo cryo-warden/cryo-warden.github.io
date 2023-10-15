@@ -5,7 +5,6 @@ export interface ISystem {
   isActive: boolean;
   update(deltaTime: number): void;
   submitEntity(entity: WorldEntity): void;
-  submitEntities(entities: WorldEntity[]): void;
   revokeEntity(entity: WorldEntity): void;
 }
 
@@ -24,12 +23,6 @@ export abstract class System<
   submitEntity(entity: WorldEntity) {
     if (this.entitySatisfiesSystem(entity)) {
       this.entities.add(entity);
-    }
-  }
-
-  submitEntities(entities: WorldEntity[]) {
-    for (let i = 0; i < entities.length; ++i) {
-      this.submitEntity(entities[i]);
     }
   }
 
