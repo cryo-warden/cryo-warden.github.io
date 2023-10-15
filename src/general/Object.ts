@@ -5,7 +5,9 @@ export type JsonSerializable =
   | string
   | JsonSerializable[]
   | {
-      [key: string]: JsonSerializable;
+      [key: string | number | symbol]: string | number extends typeof key
+        ? JsonSerializable
+        : never;
     };
 
 export const deepClone = <T extends Partial<JsonSerializable>>(value: T) =>

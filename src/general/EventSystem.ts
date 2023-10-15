@@ -1,39 +1,39 @@
-interface Event {
+type Event = {
   type: unknown;
-}
+};
 
 type Type<E extends Event> = E["type"];
 
-interface Listener<E extends Event, T extends Type<E>> {
+type Listener<E extends Event, T extends Type<E>> = {
   (event: Extract<E, { type: T }>): void;
-}
+};
 
-export interface Subscription {
+export type Subscription = {
   cancel(): void;
-}
+};
 
 type TypeSubscriptionListenerMap<E extends Event> = {
   has<T extends Type<E>>(type: T): boolean;
   get<T extends Type<E>>(type: T): Map<Subscription, Listener<E, T>>;
   set<T extends Type<E>>(
     type: T,
-    subscriptionListenerMap: Map<Subscription, Listener<E, T>>,
+    subscriptionListenerMap: Map<Subscription, Listener<E, T>>
   ): void;
   delete<T extends Type<E>>(type: T): void;
 };
 
-export interface Subscribe<E extends Event> {
+export type Subscribe<E extends Event> = {
   <T extends Type<E>>(type: T, listener: Listener<E, T>): Subscription;
-}
+};
 
-export interface Publish<E extends Event> {
+export type Publish<E extends Event> = {
   <T extends Type<E>>(event: Extract<E, { type: T }>): void;
-}
+};
 
-export interface EventSystem<E extends Event> {
+export type EventSystem<E extends Event> = {
   subscribe: Subscribe<E>;
   publish: Publish<E>;
-}
+};
 
 const emptySubscription = {
   cancel: () => {},

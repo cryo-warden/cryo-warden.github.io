@@ -5,13 +5,13 @@ export type Component = {
   [key: string]: JsonSerializable;
 };
 
-export interface TransformComponent extends Component {
+export type TransformComponent = {
   position: Vector;
-}
+};
 
-export interface MoverComponent extends Component {
+export type MoverComponent = {
   velocity: Vector;
-}
+};
 
 export type PathType = "library" | "descendant";
 

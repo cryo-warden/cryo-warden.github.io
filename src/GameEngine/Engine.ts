@@ -1,17 +1,17 @@
 import { Subscribe } from "general/EventSystem";
 import { EngineEvent, createEngineEventSystem } from "./EventSystem";
 // import { MovementSystem, World } from "./World";
-import { mockWorld } from "./World";
+import { mockWorld } from "./mock";
 
 type EngineAction = {
   type: "speak";
   content: string;
 };
 
-export interface Engine {
+export type Engine = {
   subscribe: Subscribe<EngineEvent>;
   executeAction: (action: EngineAction) => void;
-}
+};
 
 export const createEngine: () => Engine = () => {
   const eventSystem = createEngineEventSystem();

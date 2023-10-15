@@ -1,159 +1,89 @@
-// WIP Split into modules. Writing a bunch of code in here just to get things running.
-import { Vector } from "general/Vector";
-import { Component, MoverComponent, TransformComponent } from "./Component";
-import { Archetype, ComponentNames } from "./Archetype";
-import { deepClone } from "general/Object";
-import { Entity, EntityId, SystemEntity, WorldEntity } from "./Entity";
-import { System } from "./System";
-
-export type EntityComponentMap<TComponent extends Component> = Map<
+import {
+  Entity,
   EntityId,
-  TComponent
->;
+  WorldEntity,
+  createEntityIdFactory,
+  createWorldEntities,
+} from "./Entity";
+import { ISystem } from "./System";
 
-interface ComponentRegistry<TArchetype extends Archetype> {
-  has(name: keyof TArchetype): boolean;
-  get<TComponentName extends keyof TArchetype>(
-    name: TComponentName
-  ): EntityComponentMap<TArchetype[TComponentName]>;
-  set<TComponentName extends keyof TArchetype>(
-    name: TComponentName,
-    entityComponentMap: EntityComponentMap<TArchetype[TComponentName]>
-  ): void;
-  delete(name: keyof TArchetype): void;
-}
+export class World {
+  private systems: ISystem[] = [];
+  private entityInsertionQueue: Entity[] = [];
+  private entityRemovalQueue: EntityId[] = [];
 
-class WorldState<TArchetype extends Archetype> {
-  private nextEntityId: EntityId = 0;
-  private entitySet: Set<EntityId> = new Set();
-  private componentRegistry: ComponentRegistry<TArchetype> = new Map();
-  entities: WorldEntity<TArchetype>[] = [];
-
-  addComponent<TComponentName extends keyof TArchetype>(
-    id: EntityId,
-    name: TComponentName,
-    component: TArchetype[TComponentName]
-  ) {
-    if (!this.componentRegistry.has(name)) {
-      this.componentRegistry.set(name, new Map());
-    }
-    const map = this.componentRegistry.get(name);
-    map.set(id, component);
-  }
-
-  addEntity(entity: Entity<TArchetype>): void {
-    if (entity == null) {
-      return;
-    }
-    const id = this.nextEntityId++;
-    const worldEntity: WorldEntity<TArchetype> = {
-      id,
-      components: deepClone(entity.components),
-    };
-    this.entities.push(worldEntity);
-    this.entitySet.add(id);
-    const { components } = entity; // WIP Scan children too
-    for (let name in components) {
-      const component = components[name];
-      if (component != null) {
-        this.addComponent(id, name, component);
-      }
-    }
-  }
-  removeEntity(id: EntityId): void {
-    if (id == null) {
-      return;
-    }
-    this.entitySet.delete(id);
-    // WIP Remove components from registry.
-  }
-}
-
-export class World<TArchetype extends Archetype> {
-  private systems: System<TArchetype, ComponentNames<TArchetype>>[] = [];
-  private entityInsertionQueue: Entity<TArchetype>[] = [];
-  private worldEntityRemovalQueue: EntityId[] = [];
-  private state = new WorldState<TArchetype>();
-
-  addSystem(system: System<TArchetype, ComponentNames<TArchetype>>) {
+  addSystem(system: ISystem) {
     // Add resources (such as event pubsub and library data)
     this.systems.push(system);
-    // system.submitEntities(); // WIP
+    system.submitEntities(Array.from(this.worldEntityMap.values()));
   }
 
-  addEntity(entity: Entity<TArchetype>): void {
+  addEntity(entity: Entity): void {
     this.entityInsertionQueue.push(entity);
   }
-  removeEntity(worldEntityId: EntityId): void {
-    this.worldEntityRemovalQueue.push(worldEntityId);
+  removeEntity(entityId: EntityId): void {
+    this.entityRemovalQueue.push(entityId);
   }
 
   update(deltaTime: number): void {
-    for (let i = 0; i < this.systems.length; ++i) {
-      const system = this.systems[i];
-      if (system.isActive) {
-        system.update(deltaTime);
-      }
-    }
-
-    while (this.worldEntityRemovalQueue.length > 0) {
-      const entityIdToRemove = this.worldEntityRemovalQueue.pop();
+    while (this.entityRemovalQueue.length > 0) {
+      const entityIdToRemove = this.entityRemovalQueue.pop();
       if (entityIdToRemove != null) {
-        this.state.removeEntity(entityIdToRemove);
+        this.removeWorldEntity(entityIdToRemove);
       }
     }
 
     while (this.entityInsertionQueue.length > 0) {
       const entityToAdd = this.entityInsertionQueue.pop();
       if (entityToAdd != null) {
-        this.state.addEntity(entityToAdd);
+        this.addWorldEntity(entityToAdd);
+      }
+    }
+
+    for (let i = 0; i < this.systems.length; ++i) {
+      const system = this.systems[i];
+      if (system.isActive) {
+        system.update(deltaTime);
       }
     }
   }
-}
 
-type MockArchetype = {
-  transform: TransformComponent;
-  mover: MoverComponent;
-};
+  private entityIdFactory = createEntityIdFactory();
+  private worldEntityMap: Map<EntityId, WorldEntity> = new Map();
 
-const mockEntity: Entity<MockArchetype> = {
-  // WIP
-  components: {
-    transform: {
-      position: Vector.create(3, 4),
-    },
-  },
-  children: [
-    {
-      components: {
-        transform: {
-          position: Vector.create(0, -1),
-        },
-      },
-    },
-    {
-      components: {
-        transform: {
-          position: Vector.create(0, 1),
-        },
-      },
-    },
-  ],
-};
+  private submitWorldEntitiesToSystems(worldEntities: WorldEntity[]) {
+    for (let i = 0; i < this.systems.length; ++i) {
+      this.systems[i].submitEntities(worldEntities);
+    }
+  }
 
-const movementSystemComponentNames = ["transform", "mover"] as const;
+  private addWorldEntity(entity: Entity) {
+    const worldEntities = createWorldEntities(
+      null,
+      this.entityIdFactory,
+      entity
+    );
+    for (let i = 0; i < worldEntities.length; ++i) {
+      this.worldEntityMap.set(worldEntities[i].id, worldEntities[i]);
+    }
+    this.submitWorldEntitiesToSystems(worldEntities);
+  }
 
-export class MovementSystem extends System<
-  { transform: TransformComponent; mover: MoverComponent },
-  typeof movementSystemComponentNames
-> {
-  componentNames = movementSystemComponentNames;
-  update(dt: number): void {
-    this.entities;
+  private removeWorldEntity(id: EntityId) {
+    const worldEntity = this.worldEntityMap.get(id);
+    if (worldEntity == null) {
+      return;
+    }
+
+    for (let i = 0; i < this.systems.length; ++i) {
+      this.systems[i].revokeEntity(worldEntity);
+    }
+
+    this.worldEntityMap.delete(id);
+
+    if (worldEntity.children == null) return;
+    for (let i = 0; i < worldEntity.children.length; ++i) {
+      this.removeWorldEntity(worldEntity.children[i].id);
+    }
   }
 }
-
-export const mockWorld = new World();
-mockWorld.addSystem(new MovementSystem());
-mockWorld.addEntity(mockEntity);

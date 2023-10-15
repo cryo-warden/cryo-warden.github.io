@@ -1,19 +1,19 @@
 import { Component } from "./Component";
 
-export interface Archetype {
-  [key: string]: Component;
+export interface IArchetype {
+  [key: string | number | symbol]: string extends typeof key
+    ? Component
+    : never;
 }
 
-export type ComponentNames<TArchetype extends Archetype> = readonly Extract<
-  keyof TArchetype,
-  string
->[];
+export type ComponentNames<TArchetype extends IArchetype> =
+  readonly (keyof TArchetype)[];
 
 export const satisfiesArchetype = <
-  TArchetype extends Archetype,
+  TArchetype extends IArchetype,
   TComponentNames extends ComponentNames<TArchetype>,
 >(
-  components: Partial<Archetype>,
+  components: IArchetype,
   componentNames: TComponentNames
 ): components is TArchetype => {
   for (let i = 0; i < componentNames.length; ++i) {
