@@ -1,7 +1,7 @@
-export interface Vector {
-  readonly x: number;
-  readonly y: number;
-}
+export type Vector = {
+  x: number;
+  y: number;
+};
 
 const create = (x: number, y: number): Vector => ({ x, y });
 
