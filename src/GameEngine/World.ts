@@ -1,4 +1,4 @@
-import { Component } from "./Component";
+import { Component } from "./Component/Component";
 import {
   Entity,
   EntityId,
@@ -6,7 +6,7 @@ import {
   createEntityIdFactory,
   createWorldEntities,
 } from "./Entity";
-import { ISystem } from "./System";
+import { ISystem } from "./System/System";
 
 export class World {
   addSystem(system: ISystem) {
@@ -23,6 +23,7 @@ export class World {
   removeEntity(entityId: EntityId): void {
     this.entityRemovalQueue.push(entityId);
   }
+  // WIP Make Component changes also queued. IMPORTANT to keep Systems more predictable.
   addComponent(
     id: EntityId,
     componentName: string,

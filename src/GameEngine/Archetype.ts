@@ -1,4 +1,4 @@
-import { Component } from "./Component";
+import { Component } from "./Component/Component";
 
 export interface IArchetype {
   [key: string | number | symbol]: string extends typeof key

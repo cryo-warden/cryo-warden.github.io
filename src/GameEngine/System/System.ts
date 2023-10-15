@@ -1,5 +1,5 @@
-import { IArchetype, ComponentNames, satisfiesArchetype } from "./Archetype";
-import { SystemEntity, WorldEntity } from "./Entity";
+import { IArchetype, ComponentNames, satisfiesArchetype } from "../Archetype";
+import { SystemEntity, WorldEntity } from "../Entity";
 
 export interface ISystem {
   isActive: boolean;
