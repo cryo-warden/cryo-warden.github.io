@@ -3,30 +3,32 @@ import Log from "./Log/Log";
 import Focus from "./Focus/Focus";
 import Self from "./Self/Self";
 import Others from "./Others/Others";
-import { useMemo } from "react";
+import { useState } from "react";
 import { createEngine } from "GameEngine/Engine";
-import { GameEngineContext } from "./GameEngineContext";
+import { GameEngineContext, useNewGameEngine } from "./GameEngineContext";
 
 const Game = () => {
-  const engine = useMemo(() => createEngine(), []);
+  const engine = useNewGameEngine();
 
   return (
-    <GameEngineContext.Provider value={engine}>
-      <div className="Game">
-        <div className="log">
-          <Log />
+    engine && (
+      <GameEngineContext.Provider value={engine}>
+        <div className="Game">
+          <div className="log">
+            <Log />
+          </div>
+          <div className="focus">
+            <Focus />
+          </div>
+          <div className="self">
+            <Self />
+          </div>
+          <div className="others">
+            <Others />
+          </div>
         </div>
-        <div className="focus">
-          <Focus />
-        </div>
-        <div className="self">
-          <Self />
-        </div>
-        <div className="others">
-          <Others />
-        </div>
-      </div>
-    </GameEngineContext.Provider>
+      </GameEngineContext.Provider>
+    )
   );
 };
 

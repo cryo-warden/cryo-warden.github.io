@@ -1,6 +1,6 @@
 export type Vector = {
-  x: number;
-  y: number;
+  readonly x: number;
+  readonly y: number;
 };
 
 const create = (x: number, y: number): Vector => ({ x, y });

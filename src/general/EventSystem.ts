@@ -36,13 +36,14 @@ const emptySubscription = {
 };
 
 type TypeSubscriptionListenerMap<TEvent extends Event> = {
-  has<T extends Type<TEvent>>(type: T): boolean;
+  has(type: Type<TEvent>): boolean;
   get<T extends Type<TEvent>>(type: T): Map<Subscription, Listener<TEvent, T>>;
   set<T extends Type<TEvent>>(
     type: T,
     subscriptionListenerMap: Map<Subscription, Listener<TEvent, T>>
   ): void;
-  delete<T extends Type<TEvent>>(type: T): void;
+  delete(type: Type<TEvent>): void;
+  clear: () => void;
 };
 
 export type EventSystem<TEvent extends Event> = {
@@ -51,7 +52,8 @@ export type EventSystem<TEvent extends Event> = {
   /** Queue an Event for publication on the next call to this EventSystem's flush method. */
   publish: Publish<TEvent>;
   /** Clear the queue of all Events, in the order of their original publication. */
-  flush: () => void;
+  flushPublications: () => void;
+  dispose: () => void;
 };
 
 export const createEventSystem = <
@@ -113,10 +115,15 @@ export const createEventSystem = <
         eventListeners.forEach((listener) => listener(event));
       });
     },
-    flush: () => {
+    flushPublications: () => {
       while (publicationQueue.length > 0) {
         publicationQueue.shift()?.();
       }
+    },
+    dispose() {
+      publicationQueue.length = 0;
+      subscriptionToAllEventTypesMap.clear();
+      typeSubscriptionListenerMap.clear();
     },
   };
 };

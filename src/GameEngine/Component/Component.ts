@@ -1,8 +1,6 @@
 import { JsonSerializable } from "general/Object";
 
-export type Component = {
-  [key: string]: JsonSerializable;
-};
+export type Component = JsonSerializable;
 
 export type PathType = "library" | "descendant";
 

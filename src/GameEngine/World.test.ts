@@ -2,7 +2,7 @@ import { Vector } from "general/Vector";
 import { Entity } from "./Entity";
 import { System } from "./System/System";
 import { World } from "./World";
-import { MovementSystem } from "./System/Movement";
+import { MovementSystem } from "./System/MovementSystem";
 import { ComponentNames, IArchetype } from "./Archetype";
 import { EntityQuery } from "./EntityQuery";
 

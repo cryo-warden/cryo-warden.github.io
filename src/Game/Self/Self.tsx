@@ -7,7 +7,7 @@ const Self = () => {
   const speak = () => {
     engine.executeAction({
       type: "speak",
-      content: "Hello!",
+      message: "Hello!",
     });
   };
 
