@@ -9,12 +9,9 @@ export interface IArchetype {
 export type ComponentNames<TArchetype extends IArchetype> =
   readonly (keyof TArchetype)[];
 
-export const satisfiesArchetype = <
-  TArchetype extends IArchetype,
-  TComponentNames extends ComponentNames<TArchetype>,
->(
+export const satisfiesArchetype = <TArchetype extends IArchetype>(
   components: IArchetype,
-  componentNames: TComponentNames
+  componentNames: ComponentNames<TArchetype>
 ): components is TArchetype => {
   for (let i = 0; i < componentNames.length; ++i) {
     if (components[componentNames[i]] == null) {

@@ -6,14 +6,17 @@ import {
   createEntityIdFactory,
   createWorldEntities,
 } from "./Entity";
-import { ISystem } from "./System/System";
+import { IEntityQuery } from "./EntityQuery";
+import { System } from "./System/System";
 
 export class World {
-  addSystem(system: ISystem) {
-    // WIP Add resources (such as event pubsub and library data)
+  addSystem(system: System) {
     this.systems.push(system);
-    this.worldEntityMap.forEach((worldEntity) => {
-      system.submitEntity(worldEntity);
+    Object.values(system.query).forEach((query) => {
+      this.queries.add(query);
+      this.worldEntityMap.forEach((worldEntity) => {
+        query.submitEntity(worldEntity);
+      });
     });
   }
 
@@ -35,18 +38,18 @@ export class World {
 
     worldEntity.components[componentName] = component;
 
-    this.submitWorldEntityToSystems(worldEntity);
+    this.submitWorldEntityToQueries(worldEntity);
   }
   removeComponent(id: EntityId, componentName: string): void {
     const worldEntity = this.worldEntityMap.get(id);
 
     if (worldEntity == null) return;
 
-    this.removeWorldEntityFromSystems(worldEntity);
+    this.removeWorldEntityFromQueries(worldEntity);
 
     delete worldEntity.components[componentName];
 
-    this.submitWorldEntityToSystems(worldEntity);
+    this.submitWorldEntityToQueries(worldEntity);
   }
 
   update(deltaTime: number): void {
@@ -73,7 +76,8 @@ export class World {
     }
   }
 
-  private systems: ISystem[] = [];
+  private queries: Set<IEntityQuery> = new Set();
+  private systems: System[] = [];
   private entityInsertionQueue: {
     parentId: EntityId | null;
     entity: Entity;
@@ -82,15 +86,11 @@ export class World {
   private entityIdFactory = createEntityIdFactory();
   private worldEntityMap: Map<EntityId, WorldEntity> = new Map();
 
-  private submitWorldEntityToSystems(worldEntity: WorldEntity) {
-    for (let i = 0; i < this.systems.length; ++i) {
-      this.systems[i].submitEntity(worldEntity);
-    }
+  private submitWorldEntityToQueries(worldEntity: WorldEntity) {
+    this.queries.forEach((query) => query.submitEntity(worldEntity));
   }
-  private removeWorldEntityFromSystems(worldEntity: WorldEntity) {
-    for (let i = 0; i < this.systems.length; ++i) {
-      this.systems[i].revokeEntity(worldEntity);
-    }
+  private removeWorldEntityFromQueries(worldEntity: WorldEntity) {
+    this.queries.forEach((query) => query.revokeEntity(worldEntity));
   }
 
   private addWorldEntity(parentId: EntityId | null, entity: Entity) {
@@ -104,7 +104,7 @@ export class World {
     );
     for (let i = 0; i < worldEntities.length; ++i) {
       this.worldEntityMap.set(worldEntities[i].id, worldEntities[i]);
-      this.submitWorldEntityToSystems(worldEntities[i]);
+      this.submitWorldEntityToQueries(worldEntities[i]);
     }
   }
 
@@ -119,9 +119,7 @@ export class World {
       }
     }
 
-    for (let i = 0; i < this.systems.length; ++i) {
-      this.systems[i].revokeEntity(worldEntity);
-    }
+    this.removeWorldEntityFromQueries(worldEntity);
 
     this.worldEntityMap.delete(id);
   }

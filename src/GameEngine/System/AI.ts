@@ -1,14 +1,12 @@
 import { System } from "./System";
 import { AI } from "GameEngine/Component/AI";
 import { Actor } from "GameEngine/Component/Actor";
+import { EntityQuery } from "GameEngine/EntityQuery";
 
-const componentNames = ["ai", "actor"] as const;
-
-export class PlayerSystem extends System<
-  { ai: AI; actor: Actor },
-  typeof componentNames
-> {
-  componentNames = componentNames;
+export class AISystem extends System {
+  query = {
+    aiActors: new EntityQuery<{ ai: AI; actor: Actor }>(["ai", "actor"]),
+  };
   update(dt: number): void {
     // WIP
   }

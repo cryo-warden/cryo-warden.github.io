@@ -4,28 +4,30 @@ import { System } from "./System/System";
 import { World } from "./World";
 import { MovementSystem } from "./System/Movement";
 import { ComponentNames, IArchetype } from "./Archetype";
+import { EntityQuery } from "./EntityQuery";
 
 type MutableToken = { updateCount: number; lastEntityCount: number };
 
-abstract class BaseTestSystem<T extends IArchetype> extends System<
-  T,
-  ComponentNames<T>
-> {
+abstract class BaseTestSystem extends System {
   mutableToken: MutableToken;
 
   constructor(mutableToken: MutableToken) {
     super();
     this.mutableToken = mutableToken;
   }
-
-  update(dt: number): void {
-    this.mutableToken.updateCount += 1;
-    this.mutableToken.lastEntityCount = this.entities.size;
-  }
 }
 
-class EmptyTestSystem extends BaseTestSystem<{}> {
-  componentNames: [] = [];
+class EmptyTestSystem extends BaseTestSystem {
+  query = {
+    allEntities: new EntityQuery<{}>([]),
+  };
+  update(dt: number): void {
+    this.mutableToken.updateCount += 1;
+    this.mutableToken.lastEntityCount = 0;
+    this.query.allEntities.forEach(() => {
+      this.mutableToken.lastEntityCount += 1;
+    });
+  }
 }
 
 const mockEntity: Entity = {
