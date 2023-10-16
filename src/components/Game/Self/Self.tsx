@@ -1,5 +1,5 @@
-import { useGameEngine } from "Game/GameEngineContext";
-import Button from "UI/Button";
+import Button from "components/UI/Button";
+import { useGameEngine } from "../GameEngineContext";
 
 const Self = () => {
   const engine = useGameEngine();

@@ -1,4 +1,4 @@
-import { useGameEngine } from "Game/GameEngineContext";
+import { useGameEngine } from "../GameEngineContext";
 import { useEffect, useState } from "react";
 
 const Log = () => {
