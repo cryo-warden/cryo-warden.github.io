@@ -29,9 +29,18 @@ test("stateful test of subscribe, publish, and subscription cancellation", () =>
 
   system.publish({ type: "increment" });
 
+  expect(i).toEqual(0);
+
+  system.flushPublications();
+
+  expect(i).toEqual(1);
+
+  system.flushPublications();
+
   expect(i).toEqual(1);
 
   system.publish({ type: "decrement" });
+  system.flushPublications();
 
   expect(i).toEqual(0);
 
@@ -39,10 +48,12 @@ test("stateful test of subscribe, publish, and subscription cancellation", () =>
   system.subscribe("decrement", decrement);
 
   system.publish({ type: "increment" });
+  system.flushPublications();
 
   expect(i).toEqual(2);
 
   system.publish({ type: "decrement" });
+  system.flushPublications();
 
   expect(i).toEqual(0);
 
@@ -50,10 +61,12 @@ test("stateful test of subscribe, publish, and subscription cancellation", () =>
   const otherDecSub = system.subscribe("decrement", otherDecrement);
 
   system.publish({ type: "increment" });
+  system.flushPublications();
 
   expect(i).toEqual(3);
 
   system.publish({ type: "decrement" });
+  system.flushPublications();
 
   expect(i).toEqual(0);
 
@@ -61,10 +74,12 @@ test("stateful test of subscribe, publish, and subscription cancellation", () =>
   otherDecSub.cancel();
 
   system.publish({ type: "increment" });
+  system.flushPublications();
 
   expect(i).toEqual(2);
 
   system.publish({ type: "decrement" });
+  system.flushPublications();
 
   expect(i).toEqual(0);
 });
