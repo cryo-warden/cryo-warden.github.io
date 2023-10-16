@@ -1,26 +1,4 @@
-import { EventSystem, createEventSystem } from "general/EventSystem";
 import { Vector } from "general/Vector";
-
-export type OutputEvent =
-  | {
-      type: "logMessage";
-      message: string; // WIP
-    }
-  | {
-      type: "newRoom";
-      contents: any; // WIP
-    }
-  | {
-      type: "entityExit";
-      entityID: number; // WIP
-    }
-  | {
-      type: "entityEnter";
-      entityID: number; // WIP
-    };
-
-export const createOutputEventSystem = (): EventSystem<OutputEvent> =>
-  createEventSystem<OutputEvent>();
 
 export type Action =
   | {
@@ -48,6 +26,3 @@ export const Action: ActionSource = {
 };
 
 export type InputEvent = Action;
-
-export const createInputEventSystem = (): EventSystem<InputEvent> =>
-  createEventSystem<InputEvent>();

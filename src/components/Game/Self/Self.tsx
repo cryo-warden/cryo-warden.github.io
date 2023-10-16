@@ -1,11 +1,11 @@
 import Button from "components/UI/Button";
-import { useGameEngine } from "../GameEngineContext";
+import { useDemoWorldContainer } from "../GameEngineContext";
 
 const Self = () => {
-  const engine = useGameEngine();
+  const { executeAction } = useDemoWorldContainer();
 
   const speak = () => {
-    engine.executeAction({
+    executeAction({
       type: "speak",
       message: "Hello!",
     });

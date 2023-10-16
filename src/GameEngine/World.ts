@@ -1,3 +1,4 @@
+import { Queue } from "general/Array";
 import { Component } from "./Component/Component";
 import {
   Entity,
@@ -27,11 +28,7 @@ export class World {
     this.entityRemovalQueue.push(entityId);
   }
   // WIP Make Component changes also queued. IMPORTANT to keep Systems more predictable.
-  addComponent(
-    id: EntityId,
-    componentName: string,
-    component: Component
-  ): void {
+  addComponent(id: EntityId, componentName: string, component: Component) {
     const worldEntity = this.worldEntityMap.get(id);
 
     if (worldEntity == null) return;
@@ -40,7 +37,7 @@ export class World {
 
     this.submitWorldEntityToQueries(worldEntity);
   }
-  removeComponent(id: EntityId, componentName: string): void {
+  removeComponent(id: EntityId, componentName: string) {
     const worldEntity = this.worldEntityMap.get(id);
 
     if (worldEntity == null) return;
@@ -52,16 +49,16 @@ export class World {
     this.submitWorldEntityToQueries(worldEntity);
   }
 
-  update(deltaTime: number): void {
+  update(deltaTime: number) {
     while (this.entityRemovalQueue.length > 0) {
-      const entityIdToRemove = this.entityRemovalQueue.pop();
+      const entityIdToRemove = this.entityRemovalQueue.shift();
       if (entityIdToRemove != null) {
         this.removeWorldEntity(entityIdToRemove);
       }
     }
 
     while (this.entityInsertionQueue.length > 0) {
-      const entityInsertion = this.entityInsertionQueue.pop();
+      const entityInsertion = this.entityInsertionQueue.shift();
       if (entityInsertion != null) {
         const { parentId, entity } = entityInsertion;
         this.addWorldEntity(parentId, entity);
@@ -78,11 +75,11 @@ export class World {
 
   private queries: Set<IEntityQuery> = new Set();
   private systems: System[] = [];
-  private entityInsertionQueue: {
+  private entityInsertionQueue: Queue<{
     parentId: EntityId | null;
     entity: Entity;
-  }[] = [];
-  private entityRemovalQueue: EntityId[] = [];
+  }> = [];
+  private entityRemovalQueue: Queue<EntityId> = [];
   private entityIdFactory = createEntityIdFactory();
   private worldEntityMap: Map<EntityId, WorldEntity> = new Map();
 

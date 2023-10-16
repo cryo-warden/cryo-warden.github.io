@@ -3,14 +3,17 @@ import Log from "./Log/Log";
 import Focus from "./Focus/Focus";
 import Self from "./Self/Self";
 import Others from "./Others/Others";
-import { GameEngineContext, useNewGameEngine } from "./GameEngineContext";
+import {
+  DemoWorldContainerContext,
+  useNewGameEngine,
+} from "./GameEngineContext";
 
 const Game = () => {
   const engine = useNewGameEngine();
 
   return (
     engine && (
-      <GameEngineContext.Provider value={engine}>
+      <DemoWorldContainerContext.Provider value={engine}>
         <div className="Game">
           <div className="log">
             <Log />
@@ -25,7 +28,7 @@ const Game = () => {
             <Others />
           </div>
         </div>
-      </GameEngineContext.Provider>
+      </DemoWorldContainerContext.Provider>
     )
   );
 };

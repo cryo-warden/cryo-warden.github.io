@@ -1,8 +1,8 @@
-import { Vector } from "general/Vector";
-import { System } from "./System";
+import { System } from "GameEngine/System/System";
 import { Transform } from "GameEngine/Component/Transform";
-import { Motion } from "GameEngine/Component/Motion";
 import { EntityQuery } from "GameEngine/EntityQuery";
+import { Vector } from "general/Vector";
+import { Motion } from "../Component/Motion";
 
 export class MovementSystem extends System {
   query = {
@@ -11,7 +11,7 @@ export class MovementSystem extends System {
       "motion",
     ]),
   };
-  update(dt: number): void {
+  update(dt: number) {
     this.query.movingEntities.forEach((entity) => {
       const { transform, motion } = entity.components;
       transform.position = Vector.add(

@@ -2,8 +2,6 @@ import { Vector } from "general/Vector";
 import { Entity } from "./Entity";
 import { System } from "./System/System";
 import { World } from "./World";
-import { MovementSystem } from "./System/MovementSystem";
-import { ComponentNames, IArchetype } from "./Archetype";
 import { EntityQuery } from "./EntityQuery";
 
 type MutableToken = { updateCount: number; lastEntityCount: number };
@@ -21,7 +19,7 @@ class EmptyTestSystem extends BaseTestSystem {
   query = {
     allEntities: new EntityQuery<{}>([]),
   };
-  update(dt: number): void {
+  update() {
     this.mutableToken.updateCount += 1;
     this.mutableToken.lastEntityCount = 0;
     this.query.allEntities.forEach(() => {
@@ -66,7 +64,6 @@ describe("World", () => {
 
     const mockWorld = new World();
     mockWorld.addSystem(new EmptyTestSystem(mutableToken));
-    mockWorld.addSystem(new MovementSystem());
     mockWorld.addEntity(null, mockEntity);
 
     mockWorld.update(1);

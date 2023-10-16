@@ -1,0 +1,17 @@
+export type OutputEvent =
+  | {
+      type: "logMessage";
+      message: string; // WIP
+    }
+  | {
+      type: "newRoom";
+      contents: any; // WIP
+    }
+  | {
+      type: "entityExit";
+      entityID: number; // WIP
+    }
+  | {
+      type: "entityEnter";
+      entityID: number; // WIP
+    };

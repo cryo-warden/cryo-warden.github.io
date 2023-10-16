@@ -1,8 +1,9 @@
-import { System } from "./System";
-import { Motion } from "GameEngine/Component/Motion";
-import { Actor } from "GameEngine/Component/Actor";
 import { EntityQuery } from "GameEngine/EntityQuery";
-import { Action } from "GameEngine/EventSystem";
+import { System } from "GameEngine/System/System";
+import { Actor } from "../Component/Actor";
+import { Motion } from "../Component/Motion";
+import { Output } from "../Component/Output";
+import { Action } from "../InputEvent";
 
 export class ActionSystem extends System {
   query = {
@@ -10,8 +11,9 @@ export class ActionSystem extends System {
       "actor",
       "motion",
     ]),
+    outputs: new EntityQuery<{ output: Output }>(["output"]),
   };
-  update(dt: number): void {
+  update(dt: number) {
     this.query.actors.forEach((entity) => {
       const { actor, motion } = entity.components;
       const { action } = actor;
@@ -22,7 +24,13 @@ export class ActionSystem extends System {
           motion.velocity = action.direction; // WIP Parameterize speed and ensure that the direction is coerced to a unit Vector, or at least has square magnitude less than 1.
           break;
         case "speak":
-          console.log(action.message); // WIP Create an entity with an Audible component in this location? That's probably simpler than having a whole AudioSpace component that we also query here.
+          this.query.outputs.forEach((output) => {
+            // WIP Create an entity with an Audible component in this Entity's location? That's probably simpler than having a whole AudioSpace component that we also query here.
+            output.components.output.events.push({
+              type: "logMessage",
+              message: action.message,
+            });
+          });
           break;
       }
       actor.action = Action.none;
