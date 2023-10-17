@@ -1,11 +1,23 @@
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', "Arial", sans-serif;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./images/tile-hex-frame.png');
+  background-image: url("./images/tile-hex-frame.png");
   color: white;
   background-color: black;
+}
+
+a {
+  color: #88f;
+}
+
+a:hover {
+  color: #aaf;
+}
+
+a:visited {
+  color: #aaf;
 }
 
 html,
@@ -16,5 +28,5 @@ body,
 }
 
 code {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }

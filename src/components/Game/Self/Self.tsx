@@ -1,4 +1,3 @@
-import Button from "components/UI/Button";
 import { useDemoWorldContainer } from "../GameEngineContext";
 
 const Self = () => {
@@ -7,16 +6,11 @@ const Self = () => {
   const speak = () => {
     executeAction({
       type: "speak",
-      message: "Hello!",
+      message: ["Hello!"],
     });
   };
 
-  return (
-    <div>
-      Details and actions about the player character.
-      <Button onClick={speak}>Say something.</Button>
-    </div>
-  );
+  return <div>Details and actions about the player character.</div>;
 };
 
 export default Self;

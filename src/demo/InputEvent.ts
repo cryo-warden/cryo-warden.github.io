@@ -1,4 +1,5 @@
 import { Vector } from "general/Vector";
+import { Message } from "./OutputEvent";
 
 export type Action =
   | {
@@ -10,13 +11,13 @@ export type Action =
     }
   | {
       type: "speak";
-      message: string;
+      message: Message;
     };
 
 export type ActionSource = {
   readonly none: Action;
   readonly move: (direction: Vector) => Action;
-  readonly speak: (message: string) => Action;
+  readonly speak: (message: Message) => Action;
 };
 
 export const Action: ActionSource = {

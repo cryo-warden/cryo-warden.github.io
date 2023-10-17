@@ -9,6 +9,7 @@ import {
 } from "./Entity";
 import { IEntityQuery } from "./EntityQuery";
 import { System } from "./System/System";
+import { UpdateNamedArguments } from "./Update";
 
 export class World {
   addSystem(system: System) {
@@ -49,7 +50,7 @@ export class World {
     this.submitWorldEntityToQueries(worldEntity);
   }
 
-  update(deltaTime: number) {
+  update(deltaTime: number, namedArguments: UpdateNamedArguments) {
     while (this.entityRemovalQueue.length > 0) {
       const entityIdToRemove = this.entityRemovalQueue.shift();
       if (entityIdToRemove != null) {
@@ -68,7 +69,7 @@ export class World {
     for (let i = 0; i < this.systems.length; ++i) {
       const system = this.systems[i];
       if (system.isActive) {
-        system.update(deltaTime);
+        system.update(deltaTime, namedArguments);
       }
     }
   }

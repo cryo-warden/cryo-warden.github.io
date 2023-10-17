@@ -33,6 +33,8 @@
 .Game .self,
 .Game .others {
   margin: 4px;
+  padding: 4px;
   border-radius: 8px;
   background-color: #000;
+  overflow: hidden;
 }

@@ -14,7 +14,7 @@ export const createEngine: () => Engine = () => {
   const update = (time: number) => {
     if (!isActive || world == null) return;
 
-    world.update(time - lastTime);
+    world.update(time - lastTime, { time });
     lastTime = time;
 
     requestAnimationFrame(update);
