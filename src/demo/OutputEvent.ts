@@ -16,6 +16,10 @@ export type OutputEvent =
       message: Message;
     }
   | {
+      type: "setSelfEntityView";
+      entityView: EntityView;
+    }
+  | {
       type: "gainEntityView";
       entityView: EntityView;
     }

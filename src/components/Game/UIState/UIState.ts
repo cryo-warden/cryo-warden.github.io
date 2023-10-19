@@ -7,6 +7,7 @@ import { EntityId } from "GameEngine/Entity";
 
 export type UIState = {
   messages: Message[];
+  selfEntityView: EntityView | null;
   entityViews: Record<EntityId, EntityView>;
   focusEntityId: EntityId | null;
   setFocus: (entityId: EntityId) => void;
@@ -15,6 +16,7 @@ export type UIState = {
 
 const emptyUIState: UIState = {
   messages: [],
+  selfEntityView: null,
   entityViews: {},
   focusEntityId: null,
   setFocus: () => {},
@@ -50,6 +52,16 @@ export const useNewUIState = (): UIState => {
       }
     );
 
+    const setSelfSubscription = demoWorldContainer.subscribe(
+      "setSelfEntityView",
+      (event) => {
+        setState((state) => ({
+          ...state,
+          selfEntityView: event.entityView,
+        }));
+      }
+    );
+
     const gainViewSubscription = demoWorldContainer.subscribe(
       "gainEntityView",
       (event) => {
@@ -77,6 +89,7 @@ export const useNewUIState = (): UIState => {
 
     return () => {
       logSubscription.cancel();
+      setSelfSubscription.cancel();
       gainViewSubscription.cancel();
       loseViewSubscription.cancel();
       engine.dispose();

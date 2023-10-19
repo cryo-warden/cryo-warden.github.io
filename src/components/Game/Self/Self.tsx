@@ -1,16 +1,19 @@
+import Button from "components/UI/Button";
 import { useUIState } from "../UIState/UIState";
 
 const Self = () => {
-  const { executeAction } = useUIState();
+  const { selfEntityView, setFocus } = useUIState();
+  if (selfEntityView == null) {
+    return null;
+  }
 
-  const speak = () => {
-    executeAction({
-      type: "speak",
-      message: ["Hello!"],
-    });
-  };
-
-  return <div>Details and actions about the player character.</div>;
+  return (
+    <div>
+      <Button onClick={() => setFocus(selfEntityView.id)}>
+        {selfEntityView.name}
+      </Button>
+    </div>
+  );
 };
 
 export default Self;

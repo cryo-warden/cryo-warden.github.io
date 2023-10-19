@@ -2,7 +2,7 @@ import { Vector } from "general/Vector";
 import { World } from "GameEngine/World";
 import { Action } from "./InputEvent";
 import { MovementSystem } from "./System/MovementSystem";
-import { PlayerSystem } from "./System/PlayerSystem";
+import { PlayerArchetype, PlayerSystem } from "./System/PlayerSystem";
 import { ActionSystem } from "./System/ActionSystem";
 import { InputSystem } from "./System/InputSystem";
 import { OutputSystem } from "./System/OutputSystem";
@@ -25,8 +25,12 @@ const demoPlayer: Entity = {
     input: { events: [] },
     output: { events: [] },
     actor: { action: Action.none },
-    player: { observedEntities: [] },
-  },
+    appearance: {
+      name: "The Player",
+      description: "This is your avatar within the game world.",
+    },
+    player: { selfEntityId: null, observedEntities: [] },
+  } as PlayerArchetype,
 };
 
 const greeter: Entity = {

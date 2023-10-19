@@ -16,12 +16,15 @@ const EntityView = ({ entityView }: EntityViewProps) => {
 };
 
 const Others = () => {
-  const { entityViews } = useUIState();
+  const { entityViews, selfEntityView } = useUIState();
   return (
     <div className="Others">
-      {Object.values(entityViews).map((entityView) => (
-        <EntityView key={entityView.id} entityView={entityView} />
-      ))}
+      {Object.values(entityViews).map(
+        (entityView) =>
+          (selfEntityView == null || selfEntityView.id != entityView.id) && (
+            <EntityView key={entityView.id} entityView={entityView} />
+          )
+      )}
     </div>
   );
 };

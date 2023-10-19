@@ -1,6 +1,7 @@
 import { EntityId } from "GameEngine/Entity";
 
 export type Player = {
+  selfEntityId: EntityId | null;
   observedEntities: EntityId[]; // WIP Factor observation logic into am Observer component.
 };
 
