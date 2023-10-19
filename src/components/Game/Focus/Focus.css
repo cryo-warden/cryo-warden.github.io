@@ -1,0 +1,9 @@
+.Focus > * {
+  margin: 1em 0.25em;
+}
+
+.Focus .name {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: larger;
+}

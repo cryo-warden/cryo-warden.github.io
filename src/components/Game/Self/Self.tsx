@@ -1,7 +1,7 @@
-import { useDemoWorldContainer } from "../GameEngineContext";
+import { useUIState } from "../UIState/UIState";
 
 const Self = () => {
-  const { executeAction } = useDemoWorldContainer();
+  const { executeAction } = useUIState();
 
   const speak = () => {
     executeAction({

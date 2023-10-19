@@ -25,7 +25,7 @@ const demoPlayer: Entity = {
     input: { events: [] },
     output: { events: [] },
     actor: { action: Action.none },
-    player: true,
+    player: { observedEntities: [] },
   },
 };
 
@@ -63,7 +63,27 @@ const greeter: Entity = {
       delayMS: 2000,
     },
     actor: { action: Action.none },
+    appearance: {
+      name: "The Greeter",
+      description:
+        "A formless entity poking and prodding at a mysterious, glowing device.",
+    },
     ai: {},
+  },
+};
+
+const inherentlyMysteriousDevice: Entity = {
+  components: {
+    transform: {
+      position: Vector.create(2, -2),
+    },
+    motion: { velocity: Vector.create(0, 0) },
+    actor: { action: Action.none },
+    appearance: {
+      name: "The Inherently Mysterious Device",
+      description:
+        "A mysterious, glowing device emitting a soft hum. Somehow, the mystery of it feels embedded into it, rather than being a fact about a gap in your own knowledge.",
+    },
   },
 };
 
@@ -87,6 +107,7 @@ export const createDemoWorldContainer: () => DemoWorldContainer = () => {
 
   world.addEntity(null, demoPlayer);
   world.addEntity(null, greeter);
+  world.addEntity(null, inherentlyMysteriousDevice);
 
   return {
     world,

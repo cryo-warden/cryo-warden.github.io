@@ -3,33 +3,28 @@ import Log from "./Log/Log";
 import Focus from "./Focus/Focus";
 import Self from "./Self/Self";
 import Others from "./Others/Others";
-import {
-  DemoWorldContainerContext,
-  useNewGameEngine,
-} from "./GameEngineContext";
+import { UIStateContext, useNewUIState } from "./UIState/UIState";
 
 const Game = () => {
-  const engine = useNewGameEngine();
+  const uiState = useNewUIState();
 
   return (
-    engine && (
-      <DemoWorldContainerContext.Provider value={engine}>
-        <div className="Game">
-          <div className="log">
-            <Log />
-          </div>
-          <div className="focus">
-            <Focus />
-          </div>
-          <div className="self">
-            <Self />
-          </div>
-          <div className="others">
-            <Others />
-          </div>
+    <UIStateContext.Provider value={uiState}>
+      <div className="Game">
+        <div className="log">
+          <Log />
         </div>
-      </DemoWorldContainerContext.Provider>
-    )
+        <div className="focus">
+          <Focus />
+        </div>
+        <div className="self">
+          <Self />
+        </div>
+        <div className="others">
+          <Others />
+        </div>
+      </div>
+    </UIStateContext.Provider>
   );
 };
 

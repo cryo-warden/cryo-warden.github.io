@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
-import { Message } from "demo/OutputEvent";
-import { useDemoWorldContainer } from "../GameEngineContext";
 import "./Log.css";
+import { useUIState } from "../UIState/UIState";
 
 const Log = () => {
-  const { subscribe } = useDemoWorldContainer();
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  useEffect(() => {
-    const subscription = subscribe("logMessage", (event) => {
-      setMessages((messages) => [...messages, event.message]);
-    });
-
-    return subscription.cancel;
-  }, [subscribe, setMessages]);
+  const { messages } = useUIState();
 
   return (
     <div className="Log">

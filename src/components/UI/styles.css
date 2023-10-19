@@ -1,4 +1,5 @@
 .Button {
+  display: inline-block;
   background: #111;
   border-radius: 1em;
   color: white;

@@ -1,0 +1,10 @@
+.Others > * {
+  margin: 0.25em;
+}
+
+.Others .EntityView,
+.Others .EntityView button {
+  box-sizing: border-box;
+  display: block;
+  width: calc(100% - 0.25em);
+}
