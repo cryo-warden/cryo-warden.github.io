@@ -16,14 +16,14 @@ export type OutputEvent =
       message: Message;
     }
   | {
-      type: "setSelfEntityView";
+      type: "observeSelf";
       entityView: EntityView;
     }
   | {
-      type: "gainEntityView";
+      type: "observeEntity";
       entityView: EntityView;
     }
   | {
-      type: "loseEntityView";
+      type: "unobserveEntity";
       entityId: EntityId;
     };

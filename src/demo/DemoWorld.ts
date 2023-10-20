@@ -8,6 +8,10 @@ import { InputSystem } from "./System/InputSystem";
 import { OutputSystem } from "./System/OutputSystem";
 import { Entity } from "GameEngine/Entity";
 import { ConversationSystem } from "./System/ConversationSystem";
+import {
+  ObservationSystem,
+  ObserverArchetype,
+} from "./System/ObservationSystem";
 
 export type DemoWorldContainer = {
   world: World;
@@ -25,12 +29,13 @@ const demoPlayer: Entity = {
     input: { events: [] },
     output: { events: [] },
     actor: { action: Action.none },
-    appearance: {
+    observable: {
       name: "The Player",
       description: "This is your avatar within the game world.",
     },
-    player: { selfEntityId: null, observedEntities: [] },
-  } as PlayerArchetype,
+    player: { selfEntityId: null },
+    observer: { observedEntities: [] },
+  } as PlayerArchetype & ObserverArchetype,
 };
 
 const greeter: Entity = {
@@ -67,7 +72,7 @@ const greeter: Entity = {
       delayMS: 2000,
     },
     actor: { action: Action.none },
-    appearance: {
+    observable: {
       name: "The Greeter",
       description:
         "A formless entity poking and prodding at a mysterious, glowing device.",
@@ -83,7 +88,7 @@ const inherentlyMysteriousDevice: Entity = {
     },
     motion: { velocity: Vector.create(0, 0) },
     actor: { action: Action.none },
-    appearance: {
+    observable: {
       name: "The Inherently Mysterious Device",
       description:
         "A mysterious, glowing device emitting a soft hum. Somehow, the mystery of it feels embedded into it, rather than being a fact about a gap in your own knowledge.",
@@ -98,15 +103,11 @@ export const createDemoWorldContainer: () => DemoWorldContainer = () => {
   const world: World = new World();
 
   world.addSystem(inputSystem);
-
   world.addSystem(new PlayerSystem());
-
   world.addSystem(new ConversationSystem());
-
   world.addSystem(new ActionSystem());
-
   world.addSystem(new MovementSystem());
-
+  world.addSystem(new ObservationSystem());
   world.addSystem(outputSystem);
 
   world.addEntity(null, demoPlayer);

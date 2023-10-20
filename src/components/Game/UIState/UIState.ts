@@ -53,7 +53,7 @@ export const useNewUIState = (): UIState => {
     );
 
     const setSelfSubscription = demoWorldContainer.subscribe(
-      "setSelfEntityView",
+      "observeSelf",
       (event) => {
         setState((state) => ({
           ...state,
@@ -63,7 +63,7 @@ export const useNewUIState = (): UIState => {
     );
 
     const gainViewSubscription = demoWorldContainer.subscribe(
-      "gainEntityView",
+      "observeEntity",
       (event) => {
         setState((state) => ({
           ...state,
@@ -76,7 +76,7 @@ export const useNewUIState = (): UIState => {
     );
 
     const loseViewSubscription = demoWorldContainer.subscribe(
-      "loseEntityView",
+      "unobserveEntity",
       (event) => {
         setState((state) => {
           const { [event.entityId]: _, ...entityViews } = state.entityViews;

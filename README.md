@@ -42,22 +42,21 @@ Components should not end their name with "Component". Any JSON-deserializable t
 - Consolidate design pattern between using classes VS using plain object factories.
   - "Composition over inheritance" is a good principle to decide this. Hint, hint.
   - Counterpoint: This project is partially a LEARNING EXPERIENCE. Using different styles actually provides some value toward this core goal.
-    - At minimum, ensure that there is a VERY clear distinction between type which should be defined as classes VS types that should
+    - At minimum, ensure that there is a VERY clear distinction between type which should be defined as classes VS types that should not.
 
 ### TODO
 
+- Solve the entity-reference deserialization problem.
 - Make use of the "readonly" TypeScript keyword in the many, many places where that is intended.
-- Allow mono-value Component definitions, not requiring object container for extremely simple components.
-  not.
 - Design and implement `ConversationSystem`, allowing an Entity with the `ConversationListener` Component to gather "topics" from received messaged and use these to unlock new speech options.
 
 ### TODO Post-MVP
 
-- Move ActionSystem, PlayerSystem, AISystem, and the relevant components to a directory outside the library-style GameEngine directory. Essentially, anything that defines or consumes the Input and Output Events has a code-smell of being too specific to belong in GameEngine, rather than part of the core implementation.
-- Add PlayerActionQueue resource to receive input from user, to be consumed within PlayerSystem.
-
 ### DONE
 
+- Move ActionSystem, PlayerSystem, AISystem, and the relevant components to a directory outside the library-style GameEngine directory. Essentially, anything that defines or consumes the Input and Output Events has a code-smell of being too specific to belong in GameEngine, rather than part of the core implementation.
+- Add PlayerActionQueue resource to receive input from user, to be consumed within PlayerSystem.
+- Allow mono-value Component definitions, not requiring object container for extremely simple components.
 - Implement ComponentQueries abstraction, allowing Systems to fetch different intersections of components for different purposes.
   - This almost-entirely removes any need for a Resource type. For example, SpatialHash can just be a Component, and each instance of this Component can have its own state constructed with a different, configurable granularity.
   - The problem with omitting the Resource type? Components are meant to be easily serialized and deserialized, for network transmission and save/load functionality. Some types cannot be easily serialized, especially in-memory references. This is why I've been thinking about the Path type, visible alongside the base Component definition.
