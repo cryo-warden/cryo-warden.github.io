@@ -8,25 +8,31 @@
     "footer footer footer";
   grid-template-columns: 20% auto 20%;
   grid-template-rows: 2em auto 1em;
-}
 
-.App>.header {
-  grid-area: header;
-  background-color: #111;
-  padding: 0.5em;
-  text-align: center;
-}
+  & > .header {
+    grid-area: header;
+    background-color: #111;
+    padding: 0.5em;
+    text-align: center;
+  }
 
-.App>.body {
-  grid-area: body;
-  background-color: black;
-  box-shadow: black 0 0 20px 20px;
-  padding: 2em;
-  text-align: center;
-}
+  & > .body {
+    grid-area: body;
+    background-color: black;
+    box-shadow: black 0 0 20px 20px;
+    padding: 2em;
+    text-align: center;
+  }
 
-.App>.footer {
-  grid-area: footer;
-  background-color: #111;
-  text-align: center;
+  & > .footer {
+    grid-area: footer;
+    background-color: #111;
+    text-align: center;
+  }
+
+  @media (max-width: 80em) {
+    & {
+      grid-template-columns: 0 auto 0;
+    }
+  }
 }

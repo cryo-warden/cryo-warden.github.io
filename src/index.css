@@ -10,14 +10,14 @@ body {
 
 a {
   color: #88f;
-}
 
-a:hover {
-  color: #aaf;
-}
+  &:hover {
+    color: #aaf;
+  }
 
-a:visited {
-  color: #aaf;
+  &:visited {
+    color: #aaf;
+  }
 }
 
 html,

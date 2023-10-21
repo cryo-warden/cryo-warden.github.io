@@ -1,10 +1,12 @@
-.Log .message {
-  margin: 0.5em;
-  text-align: start;
-  animation-duration: 1s;
-  animation-name: fade-slide-in;
-  animation-iteration-count: 1;
-  animation-direction: alternate;
+.Log {
+  & .message {
+    margin: 0.5em;
+    text-align: start;
+    animation-duration: 1s;
+    animation-name: fade-slide-in;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+  }
 }
 
 @keyframes fade-slide-in {
