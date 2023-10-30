@@ -1,4 +1,4 @@
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 import { Message } from "./OutputEvent";
 
 export type Action =

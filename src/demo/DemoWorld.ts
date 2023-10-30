@@ -1,4 +1,4 @@
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 import { World } from "GameEngine/World";
 import { Action } from "./InputEvent";
 import { MovementSystem } from "./System/MovementSystem";

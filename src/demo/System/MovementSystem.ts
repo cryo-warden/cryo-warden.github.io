@@ -1,7 +1,7 @@
 import { System } from "GameEngine/System/System";
 import { Transform } from "GameEngine/Component/Transform";
 import { EntityQuery } from "GameEngine/EntityQuery";
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 import { Motion } from "../Component/Motion";
 
 export class MovementSystem extends System {

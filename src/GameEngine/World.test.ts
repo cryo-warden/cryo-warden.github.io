@@ -1,4 +1,4 @@
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 import { Entity } from "./Entity";
 import { System } from "./System/System";
 import { World } from "./World";
