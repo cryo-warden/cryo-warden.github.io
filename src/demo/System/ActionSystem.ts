@@ -4,6 +4,7 @@ import { Actor } from "../Component/Actor";
 import { Motion } from "../Component/Motion";
 import { Output } from "../Component/Output";
 import { Action } from "../InputEvent";
+import { Vector } from "general/Vector";
 
 export class ActionSystem extends System {
   query = {
@@ -21,7 +22,10 @@ export class ActionSystem extends System {
       // WIP Allow some actions even if not every Actor Entity has every other affected component. While this could potentially be done by using separate queries for each meaningful combination of Components, spend some time thinking about whether a superior approach is possible, such as creating a Partial option for EntityQuery (which actually might... just work anyway).
       switch (action.type) {
         case "move":
-          motion.velocity = action.direction; // WIP Parameterize speed and ensure that the direction is coerced to a unit Vector, or at least has square magnitude less than 1.
+          motion.velocity = Vector.scale(
+            Vector.unit(action.direction),
+            actor.speed
+          );
           break;
         case "speak":
           this.query.outputs.forEach((output) => {

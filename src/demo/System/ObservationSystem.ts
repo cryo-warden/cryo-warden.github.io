@@ -4,6 +4,8 @@ import { Observable } from "../Component/Observable";
 import { Observer } from "../Component/Observer";
 import { Output } from "../Component/Output";
 import { EntityId } from "GameEngine/Entity";
+import { Transform } from "GameEngine/Component/Transform";
+import { Vector } from "general/Vector";
 
 const entityObservationMap: WeakMap<Observer, Set<EntityId>> = new WeakMap();
 
@@ -35,14 +37,20 @@ export const isObservingEntity = (
 export type ObserverArchetype = {
   observer: Observer;
   output: Output;
+  transform: Transform;
 };
 
 export class ObservationSystem extends System {
   query = {
-    observers: new EntityQuery<ObserverArchetype>(["observer", "output"]),
+    observers: new EntityQuery<ObserverArchetype>([
+      "observer",
+      "output",
+      "transform",
+    ]),
     observables: new EntityQuery<{
       observable: Observable;
-    }>(["observable"]),
+      transform: Transform;
+    }>(["observable", "transform"]),
   };
   update() {
     // WIP Filter by distance, and sensory+environmental configurations.
@@ -58,6 +66,18 @@ export class ObservationSystem extends System {
             id: observable.id,
             name: observable.components.observable.name,
             description: observable.components.observable.description,
+            interactions: [
+              {
+                label: "Approach",
+                action: {
+                  type: "move",
+                  direction: Vector.subtract(
+                    observable.components.transform.position,
+                    observer.components.transform.position
+                  ),
+                },
+              },
+            ],
           },
         });
       });

@@ -34,6 +34,7 @@ export class PlayerSystem extends System {
             id: player.id,
             name: player.components.observable.name,
             description: player.components.observable.description,
+            interactions: [], // WIP
           },
         });
       }

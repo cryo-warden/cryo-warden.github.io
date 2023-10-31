@@ -28,7 +28,7 @@ const demoPlayer: Entity = {
     motion: { velocity: Vector.create(0, 0) },
     input: { events: [] },
     output: { events: [] },
-    actor: { action: Action.none },
+    actor: { action: Action.none, speed: 1 },
     observable: {
       name: "The Player",
       description: "This is your avatar within the game world.",
