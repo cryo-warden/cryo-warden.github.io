@@ -16,6 +16,7 @@ export class FluentCircle
         area: number;
         containsVector: boolean;
         nearLatticeVectors: Iterable<Vector>;
+        touches: boolean;
       }
     >
 {
@@ -66,9 +67,14 @@ export class FluentCircle
     return this;
   }
 
+  touches(c: Circle) {
+    const fc = new FluentCircle(c);
+    fc.addRadius(this.radius);
+    return fc.containsVector(this.center);
+  }
+
   /** Using a lattice defined by `resolution`, rooted at (0,0), returns all the Vectors on that lattice which share a grid cell with this `FluentCircle`. */
-  *nearLatticeVectors(resolution: number): Iterable<Vector> {
-    // MUST immediately `this.clone()` and never reference `this` again, because a generator shouldn't depend on a mutable instance available outside the scope of this function.
+  nearLatticeVectors(resolution: number): Vector[] {
     if (resolution !== Math.round(resolution)) {
       throw new Error("`resolution` MUST be an integer.");
     }
@@ -76,6 +82,8 @@ export class FluentCircle
     if (resolution < 1) {
       throw new Error("`resolution` MUST be at least 1.");
     }
+
+    const results: Vector[] = [];
 
     const enclosingCircle = this.clone().addRadius(resolution);
     const latticeVector = enclosingCircle.center.clone();
@@ -90,16 +98,18 @@ export class FluentCircle
     while (enclosingCircle.containsVector(latticeVector)) {
       const scanUpVector = latticeVector.clone();
       while (enclosingCircle.containsVector(scanUpVector)) {
-        yield scanUpVector.value();
+        results.push(scanUpVector.value());
         scanUpVector.translateY(resolution);
       }
       const scanDownVector = latticeVector.clone().translateY(-resolution);
       while (enclosingCircle.containsVector(scanDownVector)) {
-        yield scanDownVector.value();
+        results.push(scanDownVector.value());
         scanDownVector.translateY(-resolution);
       }
       latticeVector.translateX(-resolution);
     }
+
+    return results;
   }
 }
 
@@ -110,11 +120,12 @@ const area = (c: Circle) => Math.PI * c.radius * c.radius;
 const containsVector = (c: Circle, v: Vector) =>
   Vector.areNear(c.center, v, c.radius);
 
-const nearLatticeVectors = function (
-  c: Circle,
-  resolution: number
-): Iterable<Vector> {
+const nearLatticeVectors = (c: Circle, resolution: number): Vector[] => {
   return new FluentCircle(c).nearLatticeVectors(resolution);
+};
+
+const touches = (a: Circle, b: Circle): boolean => {
+  return new FluentCircle(a).touches(b);
 };
 
 export const Circle = {
@@ -122,4 +133,5 @@ export const Circle = {
   area,
   containsVector,
   nearLatticeVectors,
+  touches,
 };
