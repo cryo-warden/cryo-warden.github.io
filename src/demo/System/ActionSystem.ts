@@ -4,7 +4,7 @@ import { Actor } from "../Component/Actor";
 import { Motion } from "../Component/Motion";
 import { Output } from "../Component/Output";
 import { Action } from "../InputEvent";
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 
 export class ActionSystem extends System {
   query = {

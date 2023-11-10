@@ -5,7 +5,7 @@ import { Observer } from "../Component/Observer";
 import { Output } from "../Component/Output";
 import { EntityId } from "GameEngine/Entity";
 import { Transform } from "GameEngine/Component/Transform";
-import { Vector } from "general/Vector";
+import { Vector } from "general/Geometry/Geometry";
 
 const entityObservationMap: WeakMap<Observer, Set<EntityId>> = new WeakMap();
 
