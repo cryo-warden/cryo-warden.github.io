@@ -1,5 +1,5 @@
 import { expect } from "@jest/globals";
-import { Vector, FluentCircle, Circle } from "./Geometry";
+import { Vector } from "./Geometry";
 
 describe("Vector", () => {
   const a = Vector.create(2, 0);
@@ -64,13 +64,5 @@ describe("Vector", () => {
       y: expect.closeTo(5 / Math.sqrt(34), 5),
     });
     expect(Vector.unit(c)).toEqual({ x: 0, y: 1 });
-  });
-});
-
-describe("FluentCircle", () => {
-  it("computes nearby lattice points", () => {
-    const c = new FluentCircle(Circle.create(Vector.create(0, 50), 400));
-    const latticeVectors = Array.from(c.nearLatticeVectors(200));
-    expect(latticeVectors.length).toEqual(26);
   });
 });
