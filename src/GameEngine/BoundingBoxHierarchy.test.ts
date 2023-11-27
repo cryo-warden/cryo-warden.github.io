@@ -2,7 +2,7 @@ import { SimpleIterator } from "general/SimpleIterator";
 import { BoundingBoxHierarchy } from "./BoundingBoxHierarchy";
 import { BoundingBox } from "./BoundingBox";
 
-const { create } = BoundingBox;
+const { create, touches } = BoundingBox;
 
 describe("BoundingBoxHierarchy", () => {
   it("detects overlaps", () => {
@@ -19,6 +19,7 @@ describe("BoundingBoxHierarchy", () => {
       h.insert(box, index);
     });
     // h.log();
+
     expect(
       SimpleIterator.toSet(
         h.getTouchedValueIterator(
@@ -26,18 +27,33 @@ describe("BoundingBoxHierarchy", () => {
         )
       )
     ).toEqual(new Set(boxes.map((_, i) => i)));
-    console.log(
-      SimpleIterator.toArray(h.getTouchedValueIterator(create(0, 0, 0, 0)))
-    );
-    console.log(
-      SimpleIterator.toArray(
-        h.getTouchedValueIterator(create(100, 100, 125, 125))
-      )
-    );
-    console.log(
-      SimpleIterator.toArray(
-        h.getTouchedValueIterator(create(0, -2000, 25, 2000))
-      )
-    );
+
+    const validateAgainstBruteForce = (box: BoundingBox): void => {
+      const hSet = SimpleIterator.toSet(h.getTouchedValueIterator(box));
+
+      const bruteSet = new Set(
+        boxes
+          .map((b, i): [number, BoundingBox] => [i, b])
+          .filter(([_, b]) => {
+            return touches(b, box);
+          })
+          .map(([i]) => i)
+      );
+
+      // console.log(hSet, bruteSet);
+
+      expect(hSet).toEqual(bruteSet);
+    };
+
+    boxes.forEach(validateAgainstBruteForce);
+
+    const testBoxes = [
+      create(0, 0, 0, 0),
+      create(-10000, -10000, 10000, 10000),
+      create(100, 100, 125, 125),
+      create(0, -2000, 25, 2000),
+    ];
+
+    testBoxes.forEach(validateAgainstBruteForce);
   });
 });
