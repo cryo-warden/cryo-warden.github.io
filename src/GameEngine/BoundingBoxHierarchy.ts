@@ -1,5 +1,10 @@
 import { SimpleIterator } from "general/SimpleIterator";
 import { BoundingBox } from "./BoundingBox";
+import {
+  BinaryTree,
+  BinaryTreeLeaf,
+  BinaryTreeParent,
+} from "general/BinaryTree";
 
 const {
   area: boundingBoxArea,
@@ -7,18 +12,15 @@ const {
   touches: boundingBoxesTouch,
 } = BoundingBox;
 
-type BoundingBoxLeafNode<T> = BoundingBox & {
-  type: "leaf";
-  parent: BoundingBoxParentNode<T> | null;
+interface BoundingBoxLeafNode<T>
+  extends BoundingBox,
+    BinaryTreeLeaf<BoundingBoxLeafNode<T>, BoundingBoxParentNode<T>> {
   value: T;
-};
+}
 
-type BoundingBoxParentNode<T> = BoundingBox & {
-  type: "parent";
-  parent: BoundingBoxParentNode<T> | null;
-  leftChild: BoundingBoxNode<T>;
-  rightChild: BoundingBoxNode<T>;
-};
+interface BoundingBoxParentNode<T>
+  extends BoundingBox,
+    BinaryTreeParent<BoundingBoxLeafNode<T>, BoundingBoxParentNode<T>> {}
 
 type BoundingBoxNode<T> = BoundingBoxLeafNode<T> | BoundingBoxParentNode<T>;
 
@@ -113,20 +115,22 @@ const insert = <T>(
 
 class TouchedValueIterator<T> implements SimpleIterator<T> {
   constructor(root: BoundingBoxNode<T> | null, box: BoundingBox) {
-    this.current = root;
     this.box = box;
+    if (root !== null) {
+      this.descend(root);
+    }
 
     this.traverseToNextLeaf();
   }
   next(): T {
-    if (this.current !== null) {
-      const result = (this.current as BoundingBoxLeafNode<T>).value;
-      this.stepUp();
-      this.traverseToNextLeaf();
-      return result;
+    if (this.current === null) {
+      throw new Error("No next value exists.");
     }
 
-    throw new Error("No next value exists.");
+    const result = (this.current as BoundingBoxLeafNode<T>).value;
+    this.ascend(this.current.parent);
+    this.traverseToNextLeaf();
+    return result;
   }
   hasNext(): boolean {
     return this.current !== null;
@@ -136,36 +140,27 @@ class TouchedValueIterator<T> implements SimpleIterator<T> {
   private previous: BoundingBoxNode<T> | null = null;
   private box: BoundingBox;
 
-  private stepUp(): void {
-    if (this.current !== null) {
-      this.previous = this.current;
-      this.current = this.current.parent;
+  private ascend(parent: BoundingBoxNode<T> | null): void {
+    this.previous = this.current;
+    this.current = parent;
+  }
+
+  private descend(child: BoundingBoxNode<T>): void {
+    if (boundingBoxesTouch(child, this.box)) {
+      this.current = child;
+    } else {
+      this.previous = child;
     }
   }
 
   private traverseToNextLeaf(): void {
-    while (this.current !== null) {
-      // WIP We are going to end up repeatedly testing the same parent boxes.
-      // Consider how this check might be moved to only occur when stepping downward.
-      if (!boundingBoxesTouch(this.current, this.box)) {
-        // We are ascending because this branch does not touch our box.
-        this.previous = this.current;
-        this.current = this.current.parent;
-      } else if (this.current.type === "parent") {
-        if (this.previous === this.current.leftChild) {
-          // We are descending right because we have already visited left.
-          this.current = this.current.rightChild;
-        } else if (this.previous === this.current.rightChild) {
-          // We are ascending because we have already visited right.
-          this.previous = this.current;
-          this.current = this.current.parent;
-        } else {
-          // We are descending left.
-          this.current = this.current.leftChild;
-        }
+    while (this.current !== null && this.current.type !== "leaf") {
+      if (this.previous === this.current.rightChild) {
+        this.ascend(this.current.parent);
+      } else if (this.previous === this.current.leftChild) {
+        this.descend(this.current.rightChild);
       } else {
-        // Halt because we have reached a leaf that collides with our box.
-        return;
+        this.descend(this.current.leftChild);
       }
     }
   }
@@ -173,15 +168,62 @@ class TouchedValueIterator<T> implements SimpleIterator<T> {
 
 export class BoundingBoxHierarchy<T> {
   private root: BoundingBoxNode<T> | null = null;
+  private valueMap: Map<T, BoundingBoxLeafNode<T>> = new Map();
 
   insert(box: BoundingBox, value: T) {
+    if (this.valueMap.has(value)) {
+      throw new Error(
+        "Values inserted into a BoundingBoxHierarchy must be unique. (Have you considered using object values to obtain unique identities?)"
+      );
+    }
+
     const node = boundingBoxToLeaf(box, value);
+
+    this.valueMap.set(value, node);
 
     this.root = insert(this.root, node);
   }
 
   getTouchedValueIterator(box: BoundingBox): SimpleIterator<T> {
     return new TouchedValueIterator(this.root, box);
+  }
+
+  remove(value: T): void {
+    const node = this.valueMap.get(value);
+    if (node === undefined) {
+      return;
+    }
+
+    this.valueMap.delete(value);
+
+    const parent = node.parent;
+    if (parent === null) {
+      this.root = null;
+      return;
+    }
+
+    const sibling =
+      parent.leftChild === node ? parent.rightChild : parent.leftChild;
+
+    if (parent.parent === null) {
+      this.root = sibling;
+      return;
+    }
+
+    sibling.parent = parent.parent;
+    if (parent.parent.leftChild === parent) {
+      parent.parent.leftChild = sibling;
+    } else {
+      parent.parent.rightChild = sibling;
+    }
+  }
+
+  get depth(): number {
+    return BinaryTree.depth(this.root);
+  }
+
+  has(value: T): boolean {
+    return this.valueMap.has(value);
   }
 
   log() {
